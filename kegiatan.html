@@ -15,6 +15,7 @@
     <!-- DEKORASI -->
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
 
 
     <!-- NAVIGASI -->
@@ -37,7 +38,7 @@
 
     <main>
 
-        <!-- JUDUL HALAMAN -->
+        <!-- JUDUL KEGIATAN -->
         <section class="page-title">
 
             <p class="label">
@@ -59,7 +60,6 @@
         <!-- DAFTAR KEGIATAN -->
         <section class="activity">
 
-            <!-- KEGIATAN 01 -->
             <div class="activity-card">
 
                 <div class="number">
@@ -67,9 +67,7 @@
                 </div>
 
                 <div>
-                    <h2>
-                        Gotong Royong
-                    </h2>
+                    <h2>Gotong Royong</h2>
 
                     <p>
                         Masyarakat bersama-sama menjaga
@@ -80,7 +78,6 @@
             </div>
 
 
-            <!-- KEGIATAN 02 -->
             <div class="activity-card">
 
                 <div class="number">
@@ -88,9 +85,7 @@
                 </div>
 
                 <div>
-                    <h2>
-                        Kegiatan Keagamaan
-                    </h2>
+                    <h2>Kegiatan Keagamaan</h2>
 
                     <p>
                         Kegiatan keagamaan menjadi salah satu
@@ -101,7 +96,6 @@
             </div>
 
 
-            <!-- KEGIATAN 03 -->
             <div class="activity-card">
 
                 <div class="number">
@@ -109,9 +103,7 @@
                 </div>
 
                 <div>
-                    <h2>
-                        Kegiatan Warga
-                    </h2>
+                    <h2>Kegiatan Warga</h2>
 
                     <p>
                         Masyarakat dapat melakukan berbagai
@@ -124,7 +116,10 @@
         </section>
 
 
-        <!-- ADUAN MASYARAKAT -->
+        <!-- =========================
+             ADUAN MASYARAKAT
+        ========================= -->
+
         <section class="aduan">
 
             <div class="aduan-title">
@@ -144,7 +139,7 @@
             </div>
 
 
-            <!-- FORM -->
+            <!-- FORM ADUAN -->
             <form id="formAduan">
 
 
@@ -191,87 +186,99 @@
 
                     <select id="kategori" required>
 
-    <option value="">
-        Pilih kategori
-    </option>
+                        <option value="">
+                            Pilih kategori
+                        </option>
 
-    <option value="Infrastruktur">
-        Infrastruktur
-    </option>
+                        <option value="Infrastruktur">
+                            Infrastruktur
+                        </option>
 
-    <option value="Kebersihan">
-        Kebersihan
-    </option>
+                        <option value="Kebersihan">
+                            Kebersihan
+                        </option>
 
-    <option value="Fasilitas">
-        Fasilitas
-    </option>
+                        <option value="Fasilitas">
+                            Fasilitas
+                        </option>
 
-    <option value="Lingkungan">
-        Lingkungan
-    </option>
+                        <option value="Lingkungan">
+                            Lingkungan
+                        </option>
 
-    <option value="Lainnya">
-        Lainnya
-    </option>
+                        <option value="Lainnya">
+                            Lainnya
+                        </option>
 
-</select>
+                    </select>
 
-</div>
-
-
-<!-- JUDUL ADUAN -->
-<div class="form-group">
-
-    <label for="judul">
-        Judul Aduan
-    </label>
-
-    <input
-        type="text"
-        id="judul"
-        placeholder="Contoh: Jalan rusak"
-        required
-    >
-
-</div>
+                </div>
 
 
-<!-- DESKRIPSI -->
-<div class="form-group full">
+                <!-- JUDUL ADUAN -->
+                <div class="form-group">
 
-    <label for="deskripsi">
-        Deskripsi
-    </label>
+                    <label for="judul">
+                        Judul Aduan
+                    </label>
 
-    <textarea
-        id="deskripsi"
-        placeholder="Tuliskan aduan kamu..."
-        required
-    ></textarea>
+                    <input
+                        type="text"
+                        id="judul"
+                        placeholder="Contoh: Jalan rusak"
+                        required
+                    >
 
-</div>
-
-
-<!-- TOMBOL KIRIM -->
-<button
-    type="submit"
-    class="button"
->
-    Kirim Aduan
-</button>
-
-</form>
+                </div>
 
 
-<p id="pesanAduan"></p>
+                <!-- DESKRIPSI -->
+                <div class="form-group full">
 
-</section>
+                    <label for="deskripsi">
+                        Deskripsi
+                    </label>
 
-</main>
+                    <textarea
+                        id="deskripsi"
+                        placeholder="Tuliskan aduan atau masukan kamu..."
+                        required
+                    ></textarea>
+
+                </div>
 
 
-<script src="script.js"></script>
+                <!-- TOMBOL -->
+                <button
+                    type="submit"
+                    class="button"
+                >
+                    Kirim Aduan
+                </button>
+
+            </form>
+
+
+            <!-- PESAN -->
+            <p id="pesanAduan"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 Desa Serunai. Semua Hak Dilindungi.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
 
 </body>
 
