@@ -191,4 +191,88 @@
 
                     <select id="kategori" required>
 
-                        <
+    <option value="">
+        Pilih kategori
+    </option>
+
+    <option value="Infrastruktur">
+        Infrastruktur
+    </option>
+
+    <option value="Kebersihan">
+        Kebersihan
+    </option>
+
+    <option value="Fasilitas">
+        Fasilitas
+    </option>
+
+    <option value="Lingkungan">
+        Lingkungan
+    </option>
+
+    <option value="Lainnya">
+        Lainnya
+    </option>
+
+</select>
+
+</div>
+
+
+<!-- JUDUL ADUAN -->
+<div class="form-group">
+
+    <label for="judul">
+        Judul Aduan
+    </label>
+
+    <input
+        type="text"
+        id="judul"
+        placeholder="Contoh: Jalan rusak"
+        required
+    >
+
+</div>
+
+
+<!-- DESKRIPSI -->
+<div class="form-group full">
+
+    <label for="deskripsi">
+        Deskripsi
+    </label>
+
+    <textarea
+        id="deskripsi"
+        placeholder="Tuliskan aduan kamu..."
+        required
+    ></textarea>
+
+</div>
+
+
+<!-- TOMBOL KIRIM -->
+<button
+    type="submit"
+    class="button"
+>
+    Kirim Aduan
+</button>
+
+</form>
+
+
+<p id="pesanAduan"></p>
+
+</section>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
