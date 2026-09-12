@@ -286,7 +286,39 @@
             </div>
 
         </section>
+<section class="aduan">
+    <div class="page-title">
+        <p class="label">ADUAN MASYARAKAT</p>
+        <h1>Sampaikan Aduan</h1>
+        <p>Silakan sampaikan aduan mengenai lingkungan Desa Serunai.</p>
+    </div>
 
+    <form id="formAduan">
+
+        <input type="text" id="nama" placeholder="Nama" required>
+
+        <input type="email" id="email" placeholder="Email" required>
+
+        <select id="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="Infrastruktur">Infrastruktur</option>
+            <option value="Kebersihan">Kebersihan</option>
+            <option value="Fasilitas">Fasilitas</option>
+            <option value="Lingkungan">Lingkungan</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+
+        <input type="text" id="judul" placeholder="Judul Aduan" required>
+
+        <textarea id="deskripsi" placeholder="Deskripsi Aduan" required></textarea>
+
+        <button type="submit" class="button">Kirim Aduan</button>
+
+    </form>
+
+    <p id="pesanAduan"></p>
+</section>
+        
     </main>
 
     <script src="script.js"></script>
