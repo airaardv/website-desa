@@ -844,3 +844,233 @@ nav a.active {
         padding: 22px;
     }
 }
+
+/* =========================
+   FORM ADUAN
+========================= */
+
+.aduan {
+    width: 90%;
+    max-width: 850px;
+    margin: 100px auto 80px;
+    text-align: center;
+}
+
+.aduan .page-title {
+    margin-bottom: 40px;
+}
+
+#formAduan {
+    background: rgba(255, 255, 255, 0.65);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(80, 100, 160, 0.15);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Input dan select */
+
+#formAduan input,
+#formAduan select,
+#formAduan textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 17px;
+
+    border: 1px solid rgba(120, 130, 190, 0.25);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.85);
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Efek saat diklik */
+
+#formAduan input:focus,
+#formAduan select:focus,
+#formAduan textarea:focus {
+    border-color: #8d82d8;
+    box-shadow: 0 0 0 3px rgba(141, 130, 216, 0.12);
+}
+
+/* Judul dan deskripsi dibuat full */
+
+#formAduan input:nth-of-type(3),
+#formAduan textarea {
+    grid-column: 1 / 3;
+}
+
+#formAduan textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Tombol */
+
+#formAduan .button {
+    grid-column: 1 / 3;
+
+    border: none;
+    cursor: pointer;
+
+    padding: 15px 30px;
+    border-radius: 30px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #83c8f5, #9b82d8);
+    color: white;
+
+    transition: 0.3s;
+}
+
+#formAduan .button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(100, 100, 180, 0.2);
+}
+
+/* Pesan setelah mengirim */
+
+#pesanAduan {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* Tampilan HP */
+
+@media (max-width: 700px) {
+
+    #formAduan {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    #formAduan input:nth-of-type(3),
+    #formAduan textarea,
+    #formAduan .button {
+        grid-column: 1;
+    }
+
+}/* =========================
+   FORM ADUAN
+========================= */
+
+.aduan {
+    width: 90%;
+    max-width: 850px;
+    margin: 100px auto 80px;
+    text-align: center;
+}
+
+.aduan .page-title {
+    margin-bottom: 40px;
+}
+
+#formAduan {
+    background: rgba(255, 255, 255, 0.65);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(80, 100, 160, 0.15);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Input dan select */
+
+#formAduan input,
+#formAduan select,
+#formAduan textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 17px;
+
+    border: 1px solid rgba(120, 130, 190, 0.25);
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.85);
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Efek saat diklik */
+
+#formAduan input:focus,
+#formAduan select:focus,
+#formAduan textarea:focus {
+    border-color: #8d82d8;
+    box-shadow: 0 0 0 3px rgba(141, 130, 216, 0.12);
+}
+
+/* Judul dan deskripsi dibuat full */
+
+#formAduan input:nth-of-type(3),
+#formAduan textarea {
+    grid-column: 1 / 3;
+}
+
+#formAduan textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Tombol */
+
+#formAduan .button {
+    grid-column: 1 / 3;
+
+    border: none;
+    cursor: pointer;
+
+    padding: 15px 30px;
+    border-radius: 30px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #83c8f5, #9b82d8);
+    color: white;
+
+    transition: 0.3s;
+}
+
+#formAduan .button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(100, 100, 180, 0.2);
+}
+
+/* Pesan setelah mengirim */
+
+#pesanAduan {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* Tampilan HP */
+
+@media (max-width: 700px) {
+
+    #formAduan {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    #formAduan input:nth-of-type(3),
+    #formAduan textarea,
+    #formAduan .button {
+        grid-column: 1;
+    }
+
+}
