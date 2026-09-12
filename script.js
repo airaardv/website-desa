@@ -529,6 +529,65 @@ deskripsiKegiatan.forEach((element, index) => {
         element.textContent = kegiatan[index].deskripsi;
     }
 });
+        const formAduan = document.getElementById("formAduan");
+
+if (formAduan) {
+    formAduan.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const data = {
+            nama: document.getElementById("nama").value,
+            email: document.getElementById("email").value,
+            kategori: document.getElementById("kategori").value,
+            judul: document.getElementById("judul").value,
+            deskripsi: document.getElementById("deskripsi").value
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            document.getElementById("pesanAduan").textContent =
+                "Aduan berhasil dikirim!";
+            formAduan.reset();
+        })
+        .catch(error => {
+            document.getElementById("pesanAduan").textContent =
+                "Aduan gagal dikirim.";
+        });
+    });
+}const formAduan = document.getElementById("formAduan");
+
+if (formAduan) {
+    formAduan.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const data = {
+            nama: document.getElementById("nama").value,
+            email: document.getElementById("email").value,
+            kategori: document.getElementById("kategori").value,
+            judul: document.getElementById("judul").value,
+            deskripsi: document.getElementById("deskripsi").value
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            document.getElementById("pesanAduan").textContent =
+                "Aduan berhasil dikirim!";
+            formAduan.reset();
+        })
+        .catch(error => {
+            document.getElementById("pesanAduan").textContent =
+                "Aduan gagal dikirim.";
+        });
+    });
+}
 
     })
     .catch(error => {
