@@ -1066,3 +1066,27 @@ nav a.active {
     }
 
 }
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 40px;
+    padding: 25px 20px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+
+    color: #60748b;
+
+    font-size: 13px;
+
+    backdrop-filter: blur(12px);
+}
+
+footer p {
+    margin: 0;
+}
