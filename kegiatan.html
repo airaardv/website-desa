@@ -26,8 +26,8 @@
 
     <main>
 
+        <!-- JUDUL -->
         <section class="page-title">
-
             <p class="label">KEGIATAN MASYARAKAT</p>
 
             <h1>Kegiatan Desa Serunai</h1>
@@ -36,10 +36,10 @@
                 Kegiatan yang dilakukan untuk menjaga
                 kebersamaan masyarakat.
             </p>
-
         </section>
 
 
+        <!-- KEGIATAN -->
         <section class="activity">
 
             <div class="activity-card">
@@ -47,12 +47,12 @@
                 <div class="number">01</div>
 
                 <div>
-                    <h2 class="nama-kegiatan">Gotong Royong</h2>
+                    <h2>Gotong Royong</h2>
 
-<p class="deskripsi-kegiatan">
-    Masyarakat bersama-sama menjaga
-    kebersihan dan kenyamanan lingkungan desa.
-</p>
+                    <p>
+                        Masyarakat bersama-sama menjaga
+                        kebersihan dan kenyamanan lingkungan desa.
+                    </p>
                 </div>
 
             </div>
@@ -63,12 +63,12 @@
                 <div class="number">02</div>
 
                 <div>
-                    <h2 class="nama-kegiatan">Kegiatan Keagamaan</h2>
+                    <h2>Kegiatan Keagamaan</h2>
 
-<p class="deskripsi-kegiatan">
-    Kegiatan keagamaan menjadi salah satu
-    bentuk kebersamaan masyarakat.
-</p>
+                    <p>
+                        Kegiatan keagamaan menjadi salah satu
+                        bentuk kebersamaan masyarakat.
+                    </p>
                 </div>
 
             </div>
@@ -79,249 +79,104 @@
                 <div class="number">03</div>
 
                 <div>
-                    <h2 class="nama-kegiatan">Kegiatan Warga</h2>
+                    <h2>Kegiatan Warga</h2>
 
-<p class="deskripsi-kegiatan">
-    Masyarakat dapat melakukan berbagai
-    kegiatan bersama untuk mempererat hubungan.
-</p>
+                    <p>
+                        Masyarakat dapat melakukan berbagai
+                        kegiatan bersama untuk mempererat hubungan.
+                    </p>
                 </div>
 
             </div>
+
+        </section>
+
+
+        <!-- ADUAN -->
+        <section class="aduan">
+
+            <div class="aduan-title">
+                <p class="label">ADUAN MASYARAKAT</p>
+
+                <h1>Sampaikan Aduan</h1>
+
+                <p>
+                    Sampaikan aduan atau masukan untuk Desa Serunai.
+                </p>
+            </div>
+
+
+            <form id="formAduan">
+
+                <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input
+                        type="text"
+                        id="nama"
+                        placeholder="Masukkan nama"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Masukkan email"
+                        required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+
+                    <select id="kategori" required>
+                        <option value="">Pilih kategori</option>
+                        <option value="Infrastruktur">Infrastruktur</option>
+                        <option value="Kebersihan">Kebersihan</option>
+                        <option value="Fasilitas">Fasilitas</option>
+                        <option value="Lingkungan">Lingkungan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="judul">Judul Aduan</label>
+
+                    <input
+                        type="text"
+                        id="judul"
+                        placeholder="Contoh: Jalan rusak"
+                        required>
+                </div>
+
+
+                <div class="form-group full">
+                    <label for="deskripsi">Deskripsi</label>
+
+                    <textarea
+                        id="deskripsi"
+                        placeholder="Tuliskan aduan kamu..."
+                        required></textarea>
+                </div>
+
+
+                <button type="submit" class="button">
+                    Kirim Aduan
+                </button>
+
+            </form>
+
+            <p id="pesanAduan"></p>
 
         </section>
 
     </main>
 
-    <script src="script.js"></script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Serunai | Kegiatan</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="shape shape1"></div>
-    <div class="shape shape2"></div>
-
-    <header>
-        <div class="logo">Desa Serunai</div>
-
-        <nav>
-            <a href="index.html">Beranda</a>
-            <a href="profil.html">Profil</a>
-            <a href="fasilitas.html">Fasilitas</a>
-            <a href="lingkungan.html">Lingkungan</a>
-            <a href="kegiatan.html" class="active">Kegiatan</a>
-        </nav>
-    </header>
-
-    <main>
-
-        <section class="page-title">
-
-            <p class="label">KEGIATAN MASYARAKAT</p>
-
-            <h1>Kegiatan Desa Serunai</h1>
-
-            <p>
-                Kegiatan yang dilakukan untuk menjaga
-                kebersamaan masyarakat.
-            </p>
-
-        </section>
-
-
-        <section class="activity">
-
-            <div class="activity-card">
-
-                <div class="number">01</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Gotong Royong</h2>
-
-<p class="deskripsi-kegiatan">
-    Masyarakat bersama-sama menjaga
-    kebersihan dan kenyamanan lingkungan desa.
-</p>
-                </div>
-
-            </div>
-
-
-            <div class="activity-card">
-
-                <div class="number">02</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Kegiatan Keagamaan</h2>
-
-<p class="deskripsi-kegiatan">
-    Kegiatan keagamaan menjadi salah satu
-    bentuk kebersamaan masyarakat.
-</p>
-                </div>
-
-            </div>
-
-
-            <div class="activity-card">
-
-                <div class="number">03</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Kegiatan Warga</h2>
-
-<p class="deskripsi-kegiatan">
-    Masyarakat dapat melakukan berbagai
-    kegiatan bersama untuk mempererat hubungan.
-</p>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
 
     <script src="script.js"></script>
 
 </body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Serunai | Kegiatan</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="shape shape1"></div>
-    <div class="shape shape2"></div>
-
-    <header>
-        <div class="logo">Desa Serunai</div>
-
-        <nav>
-            <a href="index.html">Beranda</a>
-            <a href="profil.html">Profil</a>
-            <a href="fasilitas.html">Fasilitas</a>
-            <a href="lingkungan.html">Lingkungan</a>
-            <a href="kegiatan.html" class="active">Kegiatan</a>
-        </nav>
-    </header>
-
-    <main>
-
-        <section class="page-title">
-
-            <p class="label">KEGIATAN MASYARAKAT</p>
-
-            <h1>Kegiatan Desa Serunai</h1>
-
-            <p>
-                Kegiatan yang dilakukan untuk menjaga
-                kebersamaan masyarakat.
-            </p>
-
-        </section>
-
-
-        <section class="activity">
-
-            <div class="activity-card">
-
-                <div class="number">01</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Gotong Royong</h2>
-
-<p class="deskripsi-kegiatan">
-    Masyarakat bersama-sama menjaga
-    kebersihan dan kenyamanan lingkungan desa.
-</p>
-                </div>
-
-            </div>
-
-
-            <div class="activity-card">
-
-                <div class="number">02</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Kegiatan Keagamaan</h2>
-
-<p class="deskripsi-kegiatan">
-    Kegiatan keagamaan menjadi salah satu
-    bentuk kebersamaan masyarakat.
-</p>
-                </div>
-
-            </div>
-
-
-            <div class="activity-card">
-
-                <div class="number">03</div>
-
-                <div>
-                    <h2 class="nama-kegiatan">Kegiatan Warga</h2>
-
-<p class="deskripsi-kegiatan">
-    Masyarakat dapat melakukan berbagai
-    kegiatan bersama untuk mempererat hubungan.
-</p>
-                </div>
-
-            </div>
-
-        </section>
-<section class="aduan">
-    <div class="page-title">
-        <p class="label">ADUAN MASYARAKAT</p>
-        <h1>Sampaikan Aduan</h1>
-        <p>Silakan sampaikan aduan mengenai lingkungan Desa Serunai.</p>
-    </div>
-
-    <form id="formAduan">
-
-        <input type="text" id="nama" placeholder="Nama" required>
-
-        <input type="email" id="email" placeholder="Email" required>
-
-        <select id="kategori" required>
-            <option value="">Pilih Kategori</option>
-            <option value="Infrastruktur">Infrastruktur</option>
-            <option value="Kebersihan">Kebersihan</option>
-            <option value="Fasilitas">Fasilitas</option>
-            <option value="Lingkungan">Lingkungan</option>
-            <option value="Lainnya">Lainnya</option>
-        </select>
-
-        <input type="text" id="judul" placeholder="Judul Aduan" required>
-
-        <textarea id="deskripsi" placeholder="Deskripsi Aduan" required></textarea>
-
-        <button type="submit" class="button">Kirim Aduan</button>
-
-    </form>
-
-    <p id="pesanAduan"></p>
-</section>
-        
-    </main>
-
-    <script src="script.js"></script>
-
-</body>
-</html>v
+</html>
