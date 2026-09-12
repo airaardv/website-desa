@@ -846,229 +846,221 @@ nav a.active {
 }
 
 /* =========================
-   FORM ADUAN
+   ADUAN MASYARAKAT
 ========================= */
 
 .aduan {
     width: 90%;
-    max-width: 850px;
-    margin: 100px auto 80px;
-    text-align: center;
+    max-width: 900px;
+    margin: 70px auto 100px;
 }
 
-.aduan .page-title {
-    margin-bottom: 40px;
+.aduan-title {
+    text-align: center;
+    margin-bottom: 30px;
 }
+
+.aduan-title .label {
+    margin-bottom: 8px;
+}
+
+.aduan-title h1 {
+    font-size: 40px;
+    color: #304b68;
+    margin: 0 0 10px;
+}
+
+.aduan-title p:last-child {
+    color: #66788d;
+    margin: 0;
+}
+
+
+/* =========================
+   FORM
+========================= */
 
 #formAduan {
-    background: rgba(255, 255, 255, 0.65);
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(80, 100, 160, 0.15);
+    width: 100%;
+    box-sizing: border-box;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 20px;
+
+    padding: 32px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(75, 90, 140, 0.14);
+
+    backdrop-filter: blur(15px);
 }
 
-/* Input dan select */
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #526984;
+}
+
+
+/* =========================
+   INPUT & SELECT
+========================= */
 
 #formAduan input,
 #formAduan select,
 #formAduan textarea {
     width: 100%;
     box-sizing: border-box;
-    padding: 15px 17px;
 
-    border: 1px solid rgba(120, 130, 190, 0.25);
-    border-radius: 14px;
+    padding: 13px 15px;
 
-    background: rgba(255, 255, 255, 0.85);
-    font-family: inherit;
-    font-size: 15px;
+    border: 1px solid rgba(100, 120, 160, 0.22);
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: #40566f;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 
     outline: none;
+
     transition: 0.3s;
 }
 
-/* Efek saat diklik */
+
+/* FOCUS */
 
 #formAduan input:focus,
 #formAduan select:focus,
 #formAduan textarea:focus {
-    border-color: #8d82d8;
-    box-shadow: 0 0 0 3px rgba(141, 130, 216, 0.12);
+    border-color: #9072d5;
+
+    box-shadow:
+        0 0 0 3px rgba(144, 114, 213, 0.12);
 }
 
-/* Judul dan deskripsi dibuat full */
 
-#formAduan input:nth-of-type(3),
-#formAduan textarea {
-    grid-column: 1 / 3;
+/* PLACEHOLDER */
+
+#formAduan input::placeholder,
+#formAduan textarea::placeholder {
+    color: #9aa7b6;
 }
 
-#formAduan textarea {
-    min-height: 130px;
-    resize: vertical;
-}
 
-/* Tombol */
-
-#formAduan .button {
-    grid-column: 1 / 3;
-
-    border: none;
-    cursor: pointer;
-
-    padding: 15px 30px;
-    border-radius: 30px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    background: linear-gradient(135deg, #83c8f5, #9b82d8);
-    color: white;
-
-    transition: 0.3s;
-}
-
-#formAduan .button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(100, 100, 180, 0.2);
-}
-
-/* Pesan setelah mengirim */
-
-#pesanAduan {
-    margin-top: 20px;
-    font-weight: 600;
-}
-
-/* Tampilan HP */
-
-@media (max-width: 700px) {
-
-    #formAduan {
-        grid-template-columns: 1fr;
-        padding: 25px;
-    }
-
-    #formAduan input:nth-of-type(3),
-    #formAduan textarea,
-    #formAduan .button {
-        grid-column: 1;
-    }
-
-}/* =========================
-   FORM ADUAN
+/* =========================
+   DESKRIPSI
 ========================= */
 
-.aduan {
-    width: 90%;
-    max-width: 850px;
-    margin: 100px auto 80px;
-    text-align: center;
-}
-
-.aduan .page-title {
-    margin-bottom: 40px;
-}
-
-#formAduan {
-    background: rgba(255, 255, 255, 0.65);
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(80, 100, 160, 0.15);
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-/* Input dan select */
-
-#formAduan input,
-#formAduan select,
-#formAduan textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 15px 17px;
-
-    border: 1px solid rgba(120, 130, 190, 0.25);
-    border-radius: 14px;
-
-    background: rgba(255, 255, 255, 0.85);
-    font-family: inherit;
-    font-size: 15px;
-
-    outline: none;
-    transition: 0.3s;
-}
-
-/* Efek saat diklik */
-
-#formAduan input:focus,
-#formAduan select:focus,
-#formAduan textarea:focus {
-    border-color: #8d82d8;
-    box-shadow: 0 0 0 3px rgba(141, 130, 216, 0.12);
-}
-
-/* Judul dan deskripsi dibuat full */
-
-#formAduan input:nth-of-type(3),
-#formAduan textarea {
+.form-group.full {
     grid-column: 1 / 3;
 }
 
 #formAduan textarea {
-    min-height: 130px;
+    min-height: 120px;
     resize: vertical;
 }
 
-/* Tombol */
+
+/* =========================
+   BUTTON
+========================= */
 
 #formAduan .button {
     grid-column: 1 / 3;
 
+    width: 100%;
+
+    padding: 14px;
+
     border: none;
+    border-radius: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #71cbed,
+        #9072d5
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
     cursor: pointer;
 
-    padding: 15px 30px;
-    border-radius: 30px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    background: linear-gradient(135deg, #83c8f5, #9b82d8);
-    color: white;
+    box-shadow:
+        0 8px 20px rgba(80, 100, 160, 0.18);
 
     transition: 0.3s;
 }
 
 #formAduan .button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(100, 100, 180, 0.2);
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(80, 100, 160, 0.22);
 }
 
-/* Pesan setelah mengirim */
+
+/* =========================
+   PESAN
+========================= */
 
 #pesanAduan {
-    margin-top: 20px;
-    font-weight: 600;
+    text-align: center;
+
+    margin-top: 18px;
+
+    color: #536b86;
+
+    font-weight: bold;
 }
 
-/* Tampilan HP */
+
+/* =========================
+   HP
+========================= */
 
 @media (max-width: 700px) {
 
-    #formAduan {
-        grid-template-columns: 1fr;
-        padding: 25px;
+    .aduan {
+        width: 92%;
+        margin-top: 50px;
     }
 
-    #formAduan input:nth-of-type(3),
-    #formAduan textarea,
+    .aduan-title h1 {
+        font-size: 32px;
+    }
+
+    #formAduan {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        gap: 17px;
+    }
+
+    .form-group.full,
     #formAduan .button {
         grid-column: 1;
     }
