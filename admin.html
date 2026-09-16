@@ -304,13 +304,15 @@
 
     <script>
 
-        const API =
-        "https://script.google.com/macros/s/AKfycbwDcnTk3rFXTQzOd_w2twBaUK4-hWU0JVD4_HGgCTN7As3dC-U9Q46cp5TxSdwyM1jw/exec";
-
-
+        const API = 
+            "https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
         function loadAduan() {
 
-            fetch(API + "?action=getAduan")
+            
+            fetch(API + "?action=getAduan", {
+    method: "GET",
+    mode: "cors"
+})
 
                 .then(response => response.json())
 
