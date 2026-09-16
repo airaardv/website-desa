@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin | Desa Serunai</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .admin-page {
+            min-height: 100vh;
+            padding: 70px 6%;
+        }
+
+        .admin-box {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 35px;
+
+            background: rgba(255,255,255,0.75);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(75,90,140,0.15);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            color: #304b68;
+            font-size: 38px;
+        }
+
+        .logout {
+            padding: 12px 22px;
+
+            border: none;
+            border-radius: 25px;
+
+            background: #9072d5;
+            color: white;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .status {
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            color: #60738b;
+
+            font-weight: bold;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: rgba(255,255,255,0.85);
+
+            border-radius: 15px;
+
+            overflow: hidden;
+        }
+
+        th {
+            padding: 15px;
+
+            background: linear-gradient(
+                135deg,
+                #71cbed,
+                #9072d5
+            );
+
+            color: white;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+
+            border-bottom:
+                1px solid #e4e4ee;
+
+            color: #526984;
+        }
+
+        tr:hover {
+            background: rgba(235,230,255,0.5);
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #eee8ff;
+
+            color: #765bc2;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+
+            padding: 40px;
+
+            color: #718198;
+        }
+
+        @media(max-width:700px) {
+
+            .admin-page {
+                padding: 40px 4%;
+            }
+
+            .admin-box {
+                padding: 20px;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .admin-header h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+
+            th,
+            td {
+                padding: 10px;
+
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- DEKORASI -->
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+
+
+    <!-- NAVIGASI -->
+
+    <header>
+
+        <div class="logo">
+            Desa Serunai
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="fasilitas.html">
+                Fasilitas
+            </a>
+
+            <a href="lingkungan.html">
+                Lingkungan
+            </a>
+
+            <a href="kegiatan.html">
+                Kegiatan
+            </a>
+
+            <a href="admin.html" class="active">
+                Admin
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ADMIN -->
+
+    <main class="admin-page">
+
+        <div class="admin-box">
+
+            <div class="admin-header">
+
+                <h1>
+                    📋 Data Aduan
+                </h1>
+
+                <button
+                    class="logout"
+                    onclick="logout()">
+
+                    Keluar
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="status"
+                id="status">
+
+                ⏳ Memuat data aduan...
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Nama
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Kategori
+                            </th>
+
+                            <th>
+                                Judul
+                            </th>
+
+                            <th>
+                                Deskripsi
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="dataAduan">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const API =
+        "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
+
+
+        function loadAduan() {
+
+            fetch(API + "?action=getAduan")
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    const tbody =
+                        document.getElementById(
+                            "dataAduan"
+                        );
+
+                    const status =
+                        document.getElementById(
+                            "status"
+                        );
+
+                    tbody.innerHTML = "";
+
+
+                    if (data.length === 0) {
+
+                        tbody.innerHTML = `
+                            <tr>
+                                <td colspan="6"
+                                    class="empty">
+
+                                    Belum ada aduan.
+
+                                </td>
+                            </tr>
+                        `;
+
+                        status.innerHTML =
+                            "📭 Belum ada data aduan.";
+
+                        return;
+                    }
+
+
+                    data.reverse().forEach(item => {
+
+                        const row =
+                            document.createElement("tr");
+
+
+                        row.innerHTML = `
+
+                            <td>
+                                ${item.nama}
+                            </td>
+
+                            <td>
+                                ${item.email}
+                            </td>
+
+                            <td>
+                                ${item.kategori}
+                            </td>
+
+                            <td>
+                                ${item.judul}
+                            </td>
+
+                            <td>
+                                ${item.deskripsi}
+                            </td>
+
+                            <td>
+                                <span class="badge">
+                                    ${item.status}
+                                </span>
+                            </td>
+
+                        `;
+
+
+                        tbody.appendChild(row);
+
+                    });
+
+
+                    status.innerHTML =
+                        "✅ Data aduan berhasil dimuat.";
+
+                })
+
+
+                .catch(error => {
+
+                    console.error(error);
+
+                    document.getElementById(
+                        "status"
+                    ).innerHTML =
+                        "❌ Gagal memuat data aduan.";
+
+                });
+
+        }
+
+
+        function logout() {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        loadAduan();
+
+    </script>
+
+
+</body>
+
+</html>
