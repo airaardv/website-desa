@@ -301,129 +301,182 @@
 
     </main>
 
+<script>
 
-    <script>
-
-        const API = 
-            "https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
-        function loadAduan() {
-
-            
-            fetch(API + "?action=getAduan&t=" + new Date().getTime(), {
-    method: "GET",
-    mode: "cors"
-})
-
-                .then(response => response.json())
-
-                .then(data => {
-
-                    const tbody =
-                        document.getElementById(
-                            "dataAduan"
-                        );
-
-                    const status =
-                        document.getElementById(
-                            "status"
-                        );
-
-                    tbody.innerHTML = "";
+const API =
+"https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
 
 
-                    if (data.length === 0) {
+function loadAduan() {
 
-                        tbody.innerHTML = `
-                            <tr>
-                                <td colspan="6"
-                                    class="empty">
+    const status = document.getElementById("status");
+    const tbody = document.getElementById("dataAduan");
 
-                                    Belum ada aduan.
+    status.innerHTML = "⏳ Memuat data aduan...";
 
-                                </td>
-                            </tr>
-                        `;
+    fetch(API + "?action=getAduan&t=" + new Date().getTime())
 
-                        status.innerHTML =
-                            "📭 Belum ada data aduan.";
+        .then(response => response.json())
 
-                        return;
-                    }
+        .then(data => {
 
+            tbody.innerHTML = "";
 
-                    data.reverse().forEach(item => {
+            if (!data || data.length === 0) {
 
-                        const row =
-                            document.createElement("tr");
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="empty">
+                            Belum ada aduan.
+                        </td>
+                    </tr>
+                `;
 
-
-                        row.innerHTML = `
-
-                            <td>
-                                ${item.nama}
-                            </td>
-
-                            <td>
-                                ${item.email}
-                            </td>
-
-                            <td>
-                                ${item.kategori}
-                            </td>
-
-                            <td>
-                                ${item.judul}
-                            </td>
-
-                            <td>
-                                ${item.deskripsi}
-                            </td>
-
-                            <td>
-                                <span class="badge">
-                                    ${item.status}
-                                </span>
-                            </td>
-
-                        `;
+                status.innerHTML = "📭 Belum ada data aduan.";
+                return;
+            }
 
 
-                        tbody.appendChild(row);
+            data.reverse().forEach(item => {
 
-                    });
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+
+                    <td>
+                        ${item.nama || ""}
+                    </td>
+
+                    <td>
+                        ${item.email || ""}
+                    </td>
+
+                    <td>
+                        ${item.kategori || ""}
+                    </td>
+
+                    <td>
+                        ${item.judul || ""}
+                    </td>
+
+                    <td>
+                        ${item.deskripsi || ""}
+                    </td>
+
+                    <td>
+
+                        <select
+                            class="status-select"
+                            onchange="ubahStatus(${item.baris}, this.value)"
+                        >
+
+                            <option value="Menunggu"
+                                ${item.status === "Menunggu" ? "selected" : ""}>
+                                Menunggu
+                            </option>
+
+                            <option value="Diproses"
+                                ${item.status === "Diproses" ? "selected" : ""}>
+                                Diproses
+                            </option>
+
+                            <option value="Selesai"
+                                ${item.status === "Selesai" ? "selected" : ""}>
+                                Selesai
+                            </option>
+
+                        </select>
+
+                    </td>
+
+                `;
+
+                tbody.appendChild(row);
+
+            });
 
 
-                    status.innerHTML =
-                        "✅ Data aduan berhasil dimuat.";
+            status.innerHTML =
+                "✅ Data aduan berhasil dimuat.";
 
-                })
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            status.innerHTML =
+                "❌ Gagal memuat data aduan.";
+
+        });
+
+}
 
 
-                .catch(error => {
+/* =========================
+   UBAH STATUS
+========================= */
 
-                    console.error(error);
+function ubahStatus(baris, statusBaru) {
 
-                    document.getElementById(
-                        "status"
-                    ).innerHTML =
-                        "❌ Gagal memuat data aduan.";
+    fetch(API, {
 
-                });
+        method: "POST",
+
+        body: JSON.stringify({
+
+            action: "updateStatus",
+
+            baris: baris,
+
+            status: statusBaru
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.status === "success") {
+
+            alert("✅ Status berhasil diubah!");
+
+        } else {
+
+            alert("❌ Gagal mengubah status.");
 
         }
 
+    })
 
-        function logout() {
+    .catch(error => {
 
-            window.location.href =
-                "index.html";
+        console.error(error);
 
-        }
+        alert("❌ Terjadi kesalahan.");
+
+    });
+
+}
 
 
-        loadAduan();
+/* =========================
+   LOGOUT
+========================= */
 
-    </script>
+function logout() {
+
+    window.location.href = "index.html";
+
+}
+
+
+loadAduan();
+
+</script>
+
 
 
 </body>
