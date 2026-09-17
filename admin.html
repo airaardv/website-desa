@@ -318,7 +318,6 @@
 
     </main>
 
-
 <script>
 
 const API =
@@ -327,159 +326,152 @@ const API =
 
 function loadAduan() {
 
-    const status =
-        document.getElementById("status");
+    const status = document.getElementById("status");
+    const tbody = document.getElementById("dataAduan");
 
-    const tbody =
-        document.getElementById("dataAduan");
+    status.innerHTML = "⏳ Memuat data aduan...";
 
+    fetch(API + "?action=getAduan&t=" + new Date().getTime())
 
-    status.innerHTML =
-        "⏳ Memuat data aduan...";
+        .then(response => response.json())
 
+        .then(data => {
 
-    fetch(
-        API +
-        "?action=getAduan&t=" +
-        new Date().getTime()
-    )
+            tbody.innerHTML = "";
 
-    .then(response => response.json())
+            if (!data || data.length === 0) {
 
-    .then(data => {
-
-        tbody.innerHTML = "";
-
-
-        if (!data || data.length === 0) {
-
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="7" class="empty">
-                        Belum ada aduan.
-                    </td>
-                </tr>
-            `;
-
-            status.innerHTML =
-                "📭 Belum ada data aduan.";
-
-            return;
-        }
-
-
-        data.reverse().forEach(item => {
-
-            const row =
-                document.createElement("tr");
-
-
-            let statusHTML = "";
-            let aksiHTML = "";
-
-
-            if (item.status === "Terkonfirmasi") {
-
-                statusHTML = `
-                    <span class="badge confirmed">
-                        ✓ Terkonfirmasi
-                    </span>
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty">
+                            Belum ada aduan.
+                        </td>
+                    </tr>
                 `;
 
-                aksiHTML = `
-                    <span class="badge confirmed">
-                        Sudah dikonfirmasi
-                    </span>
-                `;
+                status.innerHTML = "📭 Belum ada data aduan.";
 
-            } else {
-
-                statusHTML = `
-                    <span class="badge">
-                        Menunggu
-                    </span>
-                `;
-
-                aksiHTML = `
-                    <button
-                        class="confirm-btn"
-                        onclick="konfirmasi(${item.baris})">
-
-                        Konfirmasi
-
-                    </button>
-                `;
-
+                return;
             }
 
 
-            row.innerHTML = `
+            data.reverse().forEach(item => {
 
-                <td>
-                    ${item.nama || ""}
-                </td>
+                const row = document.createElement("tr");
 
-                <td>
-                    ${item.email || ""}
-                </td>
-
-                <td>
-                    ${item.kategori || ""}
-                </td>
-
-                <td>
-                    ${item.judul || ""}
-                </td>
-
-                <td>
-                    ${item.deskripsi || ""}
-                </td>
-
-                <td>
-                    ${statusHTML}
-                </td>
-
-                <td>
-                    ${aksiHTML}
-                </td>
-
-            `;
+                let statusHTML;
+                let aksiHTML;
 
 
-            tbody.appendChild(row);
+                /* JIKA SUDAH DIKONFIRMASI */
+
+                if (item.status === "Terkonfirmasi") {
+
+                    statusHTML = `
+                        <span class="badge confirmed">
+                            ✓ Terkonfirmasi
+                        </span>
+                    `;
+
+                    aksiHTML = `
+                        <span class="badge confirmed">
+                            Sudah dikonfirmasi
+                        </span>
+                    `;
+
+                }
+
+
+                /* JIKA BELUM DIKONFIRMASI */
+
+                else {
+
+                    statusHTML = `
+                        <span class="badge">
+                            Menunggu
+                        </span>
+                    `;
+
+                    aksiHTML = `
+                        <button
+                            class="confirm-btn"
+                            onclick="konfirmasi(${item.baris})">
+
+                            Konfirmasi
+
+                        </button>
+                    `;
+
+                }
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${item.nama || ""}
+                    </td>
+
+                    <td>
+                        ${item.email || ""}
+                    </td>
+
+                    <td>
+                        ${item.kategori || ""}
+                    </td>
+
+                    <td>
+                        ${item.judul || ""}
+                    </td>
+
+                    <td>
+                        ${item.deskripsi || ""}
+                    </td>
+
+                    <td>
+                        ${statusHTML}
+                    </td>
+
+                    <td>
+                        ${aksiHTML}
+                    </td>
+
+                `;
+
+                tbody.appendChild(row);
+
+            });
+
+
+            status.innerHTML =
+                "✅ Data aduan berhasil dimuat.";
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            status.innerHTML =
+                "❌ Gagal memuat data aduan.";
 
         });
-
-
-        status.innerHTML =
-            "✅ Data aduan berhasil dimuat.";
-
-    })
-
-    .catch(error => {
-
-        console.error(error);
-
-        status.innerHTML =
-            "❌ Gagal memuat data aduan.";
-
-    });
 
 }
 
 
+
 /* =========================
-   KONFIRMASI ADUAN
+   KONFIRMASI
 ========================= */
 
 function konfirmasi(baris) {
 
-    if (!confirm(
-        "Apakah kamu yakin ingin mengonfirmasi aduan ini?"
-    )) {
+    const yakin = confirm(
+        "Konfirmasi aduan ini?"
+    );
 
+    if (!yakin) {
         return;
-
     }
 
 
@@ -532,6 +524,7 @@ function konfirmasi(baris) {
     });
 
 }
+
 
 
 /* =========================
