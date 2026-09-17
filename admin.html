@@ -309,7 +309,7 @@
         function loadAduan() {
 
             
-            fetch(API + "?action=getAduan", {
+            fetch(API + "?action=getAduan&t=" + new Date().getTime(), {
     method: "GET",
     mode: "cors"
 })
