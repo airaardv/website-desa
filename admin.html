@@ -20,7 +20,7 @@
         }
 
         .admin-box {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
             padding: 35px;
 
@@ -114,10 +114,10 @@
             background: rgba(235,230,255,0.5);
         }
 
-        .status-select {
-            padding: 8px 12px;
+        .badge {
+            display: inline-block;
 
-            border: none;
+            padding: 7px 13px;
 
             border-radius: 20px;
 
@@ -125,9 +125,35 @@
 
             color: #765bc2;
 
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .confirm-btn {
+            padding: 9px 16px;
+
+            border: none;
+
+            border-radius: 20px;
+
+            background: #9072d5;
+
+            color: white;
+
             font-weight: bold;
 
             cursor: pointer;
+        }
+
+        .confirm-btn:hover {
+            opacity: 0.85;
+        }
+
+        .confirmed {
+            background: #e4f8ed;
+
+            color: #3b9563;
         }
 
         .empty {
@@ -150,17 +176,20 @@
 
             .admin-header {
                 flex-direction: column;
+
                 gap: 15px;
             }
 
             .admin-header h1 {
                 font-size: 30px;
+
                 text-align: center;
             }
 
             th,
             td {
                 padding: 10px;
+
                 font-size: 13px;
             }
 
@@ -258,29 +287,19 @@
 
                         <tr>
 
-                            <th>
-                                Nama
-                            </th>
+                            <th>Nama</th>
 
-                            <th>
-                                Email
-                            </th>
+                            <th>Email</th>
 
-                            <th>
-                                Kategori
-                            </th>
+                            <th>Kategori</th>
 
-                            <th>
-                                Judul
-                            </th>
+                            <th>Judul</th>
 
-                            <th>
-                                Deskripsi
-                            </th>
+                            <th>Deskripsi</th>
 
-                            <th>
-                                Status
-                            </th>
+                            <th>Status</th>
+
+                            <th>Aksi</th>
 
                         </tr>
 
@@ -300,242 +319,236 @@
     </main>
 
 
-    <!-- JAVASCRIPT ADMIN -->
+<script>
 
-    <script>
-
-        const API =
-        "https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
+const API =
+"https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
 
 
-        /* =========================
-           TAMPILKAN DATA ADUAN
-        ========================= */
+function loadAduan() {
 
-        function loadAduan() {
+    const status =
+        document.getElementById("status");
 
-            const status =
-                document.getElementById("status");
+    const tbody =
+        document.getElementById("dataAduan");
 
-            const tbody =
-                document.getElementById("dataAduan");
 
+    status.innerHTML =
+        "⏳ Memuat data aduan...";
+
+
+    fetch(
+        API +
+        "?action=getAduan&t=" +
+        new Date().getTime()
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        tbody.innerHTML = "";
+
+
+        if (!data || data.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="empty">
+                        Belum ada aduan.
+                    </td>
+                </tr>
+            `;
 
             status.innerHTML =
-                "⏳ Memuat data aduan...";
+                "📭 Belum ada data aduan.";
 
-
-            fetch(
-                API +
-                "?action=getAduan&t=" +
-                new Date().getTime()
-            )
-
-            .then(response => response.json())
-
-            .then(data => {
-
-                tbody.innerHTML = "";
-
-
-                if (!data || data.length === 0) {
-
-                    tbody.innerHTML = `
-
-                        <tr>
-
-                            <td
-                                colspan="6"
-                                class="empty">
-
-                                Belum ada aduan.
-
-                            </td>
-
-                        </tr>
-
-                    `;
-
-
-                    status.innerHTML =
-                        "📭 Belum ada data aduan.";
-
-                    return;
-
-                }
-
-
-                data.reverse().forEach(item => {
-
-                    const row =
-                        document.createElement("tr");
-
-
-                    row.innerHTML = `
-
-                        <td>
-                            ${item.nama || ""}
-                        </td>
-
-                        <td>
-                            ${item.email || ""}
-                        </td>
-
-                        <td>
-                            ${item.kategori || ""}
-                        </td>
-
-                        <td>
-                            ${item.judul || ""}
-                        </td>
-
-                        <td>
-                            ${item.deskripsi || ""}
-                        </td>
-
-                        <td>
-
-                            <select
-                                class="status-select"
-                                onchange="ubahStatus(
-                                    ${item.baris},
-                                    this.value
-                                )"
-                            >
-
-                                <option
-                                    value="Menunggu"
-                                    ${item.status === "Menunggu"
-                                        ? "selected"
-                                        : ""}>
-
-                                    Menunggu
-
-                                </option>
-
-
-                                <option
-                                    value="Diproses"
-                                    ${item.status === "Diproses"
-                                        ? "selected"
-                                        : ""}>
-
-                                    Diproses
-
-                                </option>
-
-
-                                <option
-                                    value="Selesai"
-                                    ${item.status === "Selesai"
-                                        ? "selected"
-                                        : ""}>
-
-                                    Selesai
-
-                                </option>
-
-                            </select>
-
-                        </td>
-
-                    `;
-
-
-                    tbody.appendChild(row);
-
-                });
-
-
-                status.innerHTML =
-                    "✅ Data aduan berhasil dimuat.";
-
-            })
-
-
-            .catch(error => {
-
-                console.error(error);
-
-
-                status.innerHTML =
-                    "❌ Gagal memuat data aduan.";
-
-            });
-
+            return;
         }
 
 
-        /* =========================
-           UBAH STATUS ADUAN
-        ========================= */
+        data.reverse().forEach(item => {
 
-        function ubahStatus(
-            baris,
-            statusBaru
-        ) {
+            const row =
+                document.createElement("tr");
 
-            fetch(API, {
 
-                method: "POST",
+            let statusHTML = "";
+            let aksiHTML = "";
 
-                mode: "no-cors",
 
-                body: JSON.stringify({
+            if (item.status === "Terkonfirmasi") {
 
-                    action:
-                        "updateStatus",
+                statusHTML = `
+                    <span class="badge confirmed">
+                        ✓ Terkonfirmasi
+                    </span>
+                `;
 
-                    baris:
-                        baris,
+                aksiHTML = `
+                    <span class="badge confirmed">
+                        Sudah dikonfirmasi
+                    </span>
+                `;
 
-                    status:
-                        statusBaru
+            } else {
 
-                })
+                statusHTML = `
+                    <span class="badge">
+                        Menunggu
+                    </span>
+                `;
 
-            })
+                aksiHTML = `
+                    <button
+                        class="confirm-btn"
+                        onclick="konfirmasi(${item.baris})">
 
-            .then(() => {
+                        Konfirmasi
 
-                alert(
-                    "✅ Status berhasil diubah!"
-                );
+                    </button>
+                `;
 
-            })
+            }
 
-            .catch(error => {
 
-                console.error(error);
+            row.innerHTML = `
 
-                alert(
-                    "❌ Gagal mengubah status."
-                );
+                <td>
+                    ${item.nama || ""}
+                </td>
 
-            });
+                <td>
+                    ${item.email || ""}
+                </td>
+
+                <td>
+                    ${item.kategori || ""}
+                </td>
+
+                <td>
+                    ${item.judul || ""}
+                </td>
+
+                <td>
+                    ${item.deskripsi || ""}
+                </td>
+
+                <td>
+                    ${statusHTML}
+                </td>
+
+                <td>
+                    ${aksiHTML}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        });
+
+
+        status.innerHTML =
+            "✅ Data aduan berhasil dimuat.";
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        status.innerHTML =
+            "❌ Gagal memuat data aduan.";
+
+    });
+
+}
+
+
+/* =========================
+   KONFIRMASI ADUAN
+========================= */
+
+function konfirmasi(baris) {
+
+    if (!confirm(
+        "Apakah kamu yakin ingin mengonfirmasi aduan ini?"
+    )) {
+
+        return;
+
+    }
+
+
+    fetch(API, {
+
+        method: "POST",
+
+        body: JSON.stringify({
+
+            action: "updateStatus",
+
+            baris: baris,
+
+            status: "Terkonfirmasi"
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.status === "success") {
+
+            alert(
+                "✅ Aduan berhasil dikonfirmasi!"
+            );
+
+            loadAduan();
+
+        } else {
+
+            alert(
+                "❌ Gagal mengonfirmasi aduan."
+            );
 
         }
 
+    })
 
-        /* =========================
-           LOGOUT
-        ========================= */
+    .catch(error => {
 
-        function logout() {
+        console.error(error);
 
-            window.location.href =
-                "index.html";
+        alert(
+            "❌ Terjadi kesalahan."
+        );
 
-        }
+    });
+
+}
 
 
-        /* =========================
-           JALANKAN SAAT HALAMAN DIBUKA
-        ========================= */
+/* =========================
+   LOGOUT
+========================= */
 
-        loadAduan();
+function logout() {
 
-    </script>
+    window.location.href =
+        "index.html";
+
+}
+
+
+loadAduan();
+
+</script>
 
 
 </body>
