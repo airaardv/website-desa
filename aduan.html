@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Aduan Masyarakat | Desa Serunai</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .aduan-page {
+            min-height: 100vh;
+            padding: 70px 6%;
+        }
+
+        .aduan-box {
+            max-width: 1000px;
+            margin: auto;
+
+            padding: 35px;
+
+            background: rgba(255,255,255,0.78);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(75,90,140,0.15);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .aduan-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .aduan-header h1 {
+            color: #304b68;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .aduan-header p {
+            color: #60738b;
+        }
+
+        .status-info {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #60738b;
+            font-weight: bold;
+        }
+
+        .aduan-card {
+            background: rgba(255,255,255,0.9);
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(75,90,140,0.10);
+        }
+
+        .aduan-card h2 {
+            color: #304b68;
+            margin-bottom: 10px;
+        }
+
+        .aduan-card p {
+            color: #526984;
+            line-height: 1.6;
+        }
+
+        .status {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            background: #eee8ff;
+
+            color: #765bc2;
+
+            font-weight: bold;
+        }
+
+        .terkonfirmasi {
+            background: #e4f8ed;
+            color: #3b9563;
+        }
+
+        .kosong {
+            text-align: center;
+            padding: 40px;
+            color: #718198;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- DEKORASI -->
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+
+
+    <!-- NAVIGASI -->
+
+    <header>
+
+        <div class="logo">
+            Desa Serunai
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Beranda
+            </a>
+
+            <a href="profil.html">
+                Profil
+            </a>
+
+            <a href="fasilitas.html">
+                Fasilitas
+            </a>
+
+            <a href="lingkungan.html">
+                Lingkungan
+            </a>
+
+            <a href="kegiatan.html">
+                Kegiatan
+            </a>
+
+            <a href="aduan.html" class="active">
+                Aduan
+            </a>
+
+            <a href="admin.html">
+                Admin
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HALAMAN ADUAN -->
+
+    <main class="aduan-page">
+
+        <div class="aduan-box">
+
+            <div class="aduan-header">
+
+                <p class="label">
+                    ADUAN MASYARAKAT
+                </p>
+
+                <h1>
+                    Hasil Aduan Saya
+                </h1>
+
+                <p>
+                    Lihat status aduan yang telah kamu kirim.
+                </p>
+
+            </div>
+
+
+            <div
+                id="statusInfo"
+                class="status-info">
+
+                ⏳ Memuat data aduan...
+
+            </div>
+
+
+            <div id="daftarAduan">
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Desa Serunai. Semua Hak Dilindungi.
+        </p>
+
+    </footer>
+
+
+<script>
+
+const API_ADUAN =
+"https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
+
+
+function loadAduanSaya() {
+
+    const email =
+        localStorage.getItem("emailAduan");
+
+    const daftar =
+        document.getElementById("daftarAduan");
+
+    const statusInfo =
+        document.getElementById("statusInfo");
+
+
+    if (!email) {
+
+        statusInfo.innerHTML =
+            "📭 Belum ada aduan.";
+
+        daftar.innerHTML = `
+            <div class="kosong">
+                Kamu belum mengirim aduan.
+                <br><br>
+                Silakan isi aduan melalui halaman Kegiatan.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    statusInfo.innerHTML =
+        "⏳ Memuat status aduan...";
+
+
+    fetch(
+        API_ADUAN +
+        "?action=getAduan&t=" +
+        new Date().getTime()
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        const aduanSaya =
+            data.filter(function(item) {
+
+                return (
+                    item.email &&
+                    item.email.toLowerCase() ===
+                    email.toLowerCase()
+                );
+
+            });
+
+
+        if (aduanSaya.length === 0) {
+
+            statusInfo.innerHTML =
+                "📭 Aduan tidak ditemukan.";
+
+            return;
+
+        }
+
+
+        daftar.innerHTML = "";
+
+
+        aduanSaya.reverse().forEach(function(item) {
+
+            const sudahKonfirmasi =
+                item.status === "Terkonfirmasi";
+
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "aduan-card";
+
+
+            card.innerHTML = `
+
+                <h2>
+                    ${item.judul || ""}
+                </h2>
+
+                <p>
+                    <strong>Kategori:</strong>
+                    ${item.kategori || ""}
+                </p>
+
+                <p>
+                    <strong>Deskripsi:</strong>
+                    ${item.deskripsi || ""}
+                </p>
+
+                <span class="status ${
+                    sudahKonfirmasi
+                    ? "terkonfirmasi"
+                    : ""
+                }">
+
+                    ${
+                        sudahKonfirmasi
+                        ? "✅ Terkonfirmasi"
+                        : "🕐 Menunggu Konfirmasi"
+                    }
+
+                </span>
+
+            `;
+
+
+            daftar.appendChild(card);
+
+        });
+
+
+        statusInfo.innerHTML =
+            "✅ Data aduan berhasil dimuat.";
+
+    })
+
+
+    .catch(error => {
+
+        console.error(error);
+
+        statusInfo.innerHTML =
+            "❌ Gagal memuat data aduan.";
+
+    });
+
+}
+
+
+loadAduanSaya();
+
+</script>
+
+
+</body>
+
+</html>
