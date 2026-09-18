@@ -35,9 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // GOOGLE SHEETS DATA
     // =========================
 
-    const API_URL =
-        "https://script.google.com/macros/s/AKfycbw2uaazAdwUOCtHc-3BTNMeuvtvr4vT4jdNBgrMiSBcx3lccBrDupeYWM5GOEhWhJHJ/exec";
-
+    const API_ADUAN =
+    "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
 
     fetch(API_URL)
         .then(response => response.json())
