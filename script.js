@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const API_ADUAN =
     "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
 
-    fetch(API_URL)
+    fetch(API_ADUAN)
         .then(response => response.json())
         .then(data => {
 
