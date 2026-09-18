@@ -14,39 +14,25 @@
 
     <style>
 
-        /* =========================
-           HALAMAN ADUAN
-        ========================= */
-
         .aduan-page {
             min-height: 100vh;
             padding: 70px 6%;
         }
 
-
         .aduan-box {
             max-width: 1000px;
             margin: auto;
-
             padding: 40px;
-
             background: rgba(255,255,255,0.78);
-
             border-radius: 30px;
-
-            box-shadow:
-                0 15px 40px
-                rgba(75,90,140,0.15);
-
+            box-shadow: 0 15px 40px rgba(75,90,140,0.15);
             backdrop-filter: blur(15px);
         }
-
 
         .aduan-header {
             text-align: center;
             margin-bottom: 35px;
         }
-
 
         .aduan-header .label {
             color: #765bc2;
@@ -54,201 +40,110 @@
             letter-spacing: 1px;
         }
 
-
         .aduan-header h1 {
             color: #304b68;
             font-size: 38px;
             margin: 10px 0;
         }
 
-
         .aduan-header p {
             color: #60738b;
         }
 
-
-        /* =========================
-           CEK TOKEN
-        ========================= */
-
         .cek-box {
-
             max-width: 650px;
-
             margin: auto;
-
             padding: 30px;
-
             background: rgba(255,255,255,0.85);
-
             border-radius: 25px;
-
-            box-shadow:
-                0 10px 30px
-                rgba(75,90,140,0.10);
-
+            box-shadow: 0 10px 30px rgba(75,90,140,0.10);
         }
-
 
         .cek-box h2 {
             color: #304b68;
             margin-top: 0;
         }
 
-
         .cek-box p {
             color: #60738b;
         }
 
-
         .token-input {
-
             width: 100%;
-
             padding: 15px;
-
             box-sizing: border-box;
-
             border: 1px solid #ddd;
-
             border-radius: 15px;
-
             outline: none;
-
             margin: 15px 0;
-
             font-size: 15px;
-
         }
-
 
         .cek-button {
-
             padding: 13px 25px;
-
             border: none;
-
             border-radius: 25px;
-
             background: #9072d5;
-
             color: white;
-
             font-weight: bold;
-
             cursor: pointer;
-
         }
-
-
-        .cek-button:hover {
-            opacity: 0.85;
-        }
-
-
-        /* =========================
-           HASIL ADUAN
-        ========================= */
 
         #hasilAduan {
-
             display: none;
-
             margin-top: 30px;
-
             padding: 25px;
-
             background: rgba(255,255,255,0.9);
-
             border-radius: 25px;
-
             border: 1px solid #eee;
-
         }
-
 
         #hasilAduan h2 {
             color: #304b68;
             margin-top: 0;
         }
 
-
         .data-item {
-
             padding: 12px 0;
-
-            border-bottom:
-                1px solid #eeeeee;
-
+            border-bottom: 1px solid #eeeeee;
             color: #526984;
-
         }
-
 
         .data-item strong {
             color: #304b68;
         }
 
-
         .status-menunggu {
-
             display: inline-block;
-
             padding: 8px 15px;
-
             border-radius: 20px;
-
             background: #eee8ff;
-
             color: #765bc2;
-
             font-weight: bold;
-
         }
-
 
         .status-terkonfirmasi {
-
             display: inline-block;
-
             padding: 8px 15px;
-
             border-radius: 20px;
-
             background: #e4f8ed;
-
             color: #3b9563;
-
             font-weight: bold;
-
         }
-
 
         .jawaban {
-
             margin-top: 20px;
-
             padding: 18px;
-
             background: #f5f2ff;
-
             border-radius: 15px;
-
             color: #526984;
-
         }
-
 
         .pesan-error {
-
             margin-top: 15px;
-
             color: #d9534f;
-
             font-weight: bold;
-
         }
-
 
         @media(max-width:700px) {
 
@@ -277,14 +172,11 @@
 
 <body>
 
-    <!-- DEKORASI -->
 
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
     <div class="shape shape3"></div>
 
-
-    <!-- NAVIGASI -->
 
     <header>
 
@@ -292,30 +184,20 @@
             Desa Serunai
         </div>
 
-
         <nav>
 
-            <a href="index.html">
-                Beranda
-            </a>
+            <a href="index.html">Beranda</a>
 
-            <a href="profil.html">
-                Profil
-            </a>
+            <a href="profil.html">Profil</a>
 
-            <a href="fasilitas.html">
-                Fasilitas
-            </a>
+            <a href="fasilitas.html">Fasilitas</a>
 
-            <a href="lingkungan.html">
-                Lingkungan
-            </a>
+            <a href="lingkungan.html">Lingkungan</a>
 
-            <a href="kegiatan.html">
-                Kegiatan
-            </a>
+            <a href="kegiatan.html">Kegiatan</a>
 
-            <a href="aduan.html" class="active">
+            <a href="aduan.html"
+               class="active">
                 Aduan
             </a>
 
@@ -327,10 +209,6 @@
 
     </header>
 
-
-    <!-- =========================
-         HALAMAN ADUAN
-    ========================= -->
 
     <main class="aduan-page">
 
@@ -355,8 +233,6 @@
             </div>
 
 
-            <!-- CEK TOKEN -->
-
             <div class="cek-box">
 
                 <h2>
@@ -378,6 +254,7 @@
 
 
                 <button
+                    type="button"
                     class="cek-button"
                     onclick="cekAduan()">
 
@@ -391,8 +268,6 @@
                     class="pesan-error">
                 </div>
 
-
-                <!-- HASIL -->
 
                 <div id="hasilAduan">
 
@@ -463,8 +338,6 @@
     </main>
 
 
-    <!-- FOOTER -->
-
     <footer>
 
         <p>
@@ -474,31 +347,39 @@
     </footer>
 
 
-    <!-- JAVASCRIPT -->
 
     <script>
 
-       const API_ADUAN =
-"https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
+        const API_ADUAN =
+            "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
 
 
         async function cekAduan() {
 
+
             const token =
-                document.getElementById("token")
-                .value
-                .trim();
+                document
+                    .getElementById("token")
+                    .value
+                    .trim();
+
 
             const pesanError =
-                document.getElementById("pesanError");
+                document.getElementById(
+                    "pesanError"
+                );
+
 
             const hasilAduan =
-                document.getElementById("hasilAduan");
+                document.getElementById(
+                    "hasilAduan"
+                );
 
 
             pesanError.innerHTML = "";
 
-            hasilAduan.style.display = "none";
+            hasilAduan.style.display =
+                "none";
 
 
             if (!token) {
@@ -513,18 +394,33 @@
 
             try {
 
+
                 const response =
                     await fetch(
+
                         API_ADUAN +
+
                         "?action=cekAduan&token=" +
-                        encodeURIComponent(token) +
+
+                        encodeURIComponent(
+                            token
+                        ) +
+
                         "&t=" +
-                        new Date().getTime()
+
+                        Date.now()
+
                     );
 
 
                 const hasil =
                     await response.json();
+
+
+                console.log(
+                    "HASIL CEK:",
+                    hasil
+                );
 
 
                 if (
@@ -586,16 +482,16 @@
                 ) {
 
                     status.innerHTML =
-                        `<span class="status-terkonfirmasi">
-                            ✓ Terkonfirmasi
-                        </span>`;
+                        '<span class="status-terkonfirmasi">' +
+                        '✓ Terkonfirmasi' +
+                        '</span>';
 
                 } else {
 
                     status.innerHTML =
-                        `<span class="status-menunggu">
-                            🕐 Menunggu
-                        </span>`;
+                        '<span class="status-menunggu">' +
+                        '🕐 Menunggu' +
+                        '</span>';
 
                 }
 
@@ -624,19 +520,22 @@
 
 
         document
-        .getElementById("token")
-        .addEventListener(
-            "keydown",
-            function(event) {
+            .getElementById("token")
+            .addEventListener(
+                "keydown",
+                function(event) {
 
-                if (event.key === "Enter") {
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
 
-                    cekAduan();
+                        cekAduan();
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
     </script>
 
