@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-
     // =========================
     // ANIMASI
     // =========================
@@ -32,138 +31,98 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
     // =========================
-    // API DATA DESA
+    // GOOGLE SHEETS DATA
     // =========================
 
     const API_URL =
         "https://script.google.com/macros/s/AKfycbw2uaazAdwUOCtHc-3BTNMeuvtvr4vT4jdNBgrMiSBcx3lccBrDupeYWM5GOEhWhJHJ/exec";
 
 
-    // =========================
-    // API ADUAN
-    // =========================
-
-    const API_ADUAN =
-        "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
-
-
-
-    // =========================
-    // DATA DESA
-    // =========================
-
     fetch(API_URL)
-
         .then(response => response.json())
-
         .then(data => {
 
+            console.log("Data dari Google Sheets:", data);
 
-            // FASILITAS
+
+            // =========================
+            // DATA FASILITAS
+            // =========================
 
             const namaFasilitas =
-                document.querySelectorAll(
-                    ".nama-fasilitas"
-                );
+                document.querySelectorAll(".nama-fasilitas");
 
             const deskripsiFasilitas =
-                document.querySelectorAll(
-                    ".deskripsi-fasilitas"
-                );
-
+                document.querySelectorAll(".deskripsi-fasilitas");
 
             const fasilitas =
                 data.filter(
-                    item =>
-                        item.kategori === "Fasilitas"
+                    item => item.kategori === "Fasilitas"
                 );
 
 
-            fasilitas.forEach(
-                function (item, index) {
+            fasilitas.forEach(function (item, index) {
 
-                    if (namaFasilitas[index]) {
-
-                        namaFasilitas[index]
-                            .textContent =
-                            item.nama;
-
-                    }
-
-
-                    if (deskripsiFasilitas[index]) {
-
-                        deskripsiFasilitas[index]
-                            .textContent =
-                            item.deskripsi;
-
-                    }
-
+                if (namaFasilitas[index]) {
+                    namaFasilitas[index].textContent =
+                        item.nama;
                 }
-            );
+
+                if (deskripsiFasilitas[index]) {
+                    deskripsiFasilitas[index].textContent =
+                        item.deskripsi;
+                }
+
+            });
 
 
-
-            // LINGKUNGAN
+            // =========================
+            // DATA LINGKUNGAN
+            // =========================
 
             const lingkungan =
                 data.filter(
-                    item =>
-                        item.kategori === "Lingkungan"
+                    item => item.kategori === "Lingkungan"
                 );
 
 
             const namaLingkungan =
-                document.querySelector(
-                    ".nama-lingkungan"
-                );
+                document.querySelector(".nama-lingkungan");
 
             const deskripsiLingkungan =
-                document.querySelector(
-                    ".deskripsi-lingkungan"
-                );
+                document.querySelector(".deskripsi-lingkungan");
 
 
             if (lingkungan.length > 0) {
 
                 if (namaLingkungan) {
-
                     namaLingkungan.textContent =
                         lingkungan[0].nama;
-
                 }
 
-
                 if (deskripsiLingkungan) {
-
                     deskripsiLingkungan.textContent =
                         lingkungan[0].deskripsi;
-
                 }
 
             }
 
 
-
-            // KEGIATAN
+            // =========================
+            // DATA KEGIATAN
+            // =========================
 
             const namaKegiatan =
-                document.querySelectorAll(
-                    ".nama-kegiatan"
-                );
+                document.querySelectorAll(".nama-kegiatan");
 
             const deskripsiKegiatan =
-                document.querySelectorAll(
-                    ".deskripsi-kegiatan"
-                );
+                document.querySelectorAll(".deskripsi-kegiatan");
 
 
             const kegiatan =
                 data.filter(
-                    item =>
-                        item.kategori === "Kegiatan"
+                    item => item.kategori === "Kegiatan"
                 );
 
 
@@ -201,37 +160,42 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         })
-
         .catch(error => {
 
             console.error(
-                "Gagal mengambil data desa:",
+                "Gagal mengambil data:",
                 error
             );
 
         });
 
 
+    // =========================
+    // API ADUAN
+    // =========================
 
-    // =========================
-    // FORM ADUAN
-    // =========================
+    const API_ADUAN =
+        "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
+
 
     const formAduan =
         document.getElementById("formAduan");
-
 
     const statusAduan =
         document.getElementById("statusAduan");
 
 
-    if (formAduan) {
+    // =========================
+    // FORM ADUAN
+    // =========================
 
+    if (formAduan) {
 
         formAduan.addEventListener(
             "submit",
             async function (e) {
 
+                // WAJIB supaya halaman tidak refresh
                 e.preventDefault();
 
 
@@ -247,17 +211,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
 
+                // Mencegah klik dua kali
                 if (tombol.disabled) {
-
                     return;
-
                 }
 
 
                 tombol.disabled = true;
-
-                tombol.innerText =
-                    "Mengirim...";
+                tombol.innerText = "Mengirim...";
 
 
                 const nama =
@@ -290,6 +251,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     ).value.trim();
 
 
+                const dataAduan = {
+
+                    nama: nama,
+                    email: email,
+                    kategori: kategori,
+                    judul: judul,
+                    deskripsi: deskripsi
+
+                };
+
 
                 pesanAduan.innerHTML =
                     "⏳ Mengirim aduan...";
@@ -297,34 +268,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 try {
 
-
                     const response =
                         await fetch(
                             API_ADUAN,
                             {
-
                                 method: "POST",
 
                                 body:
-                                    JSON.stringify({
-
-                                        nama:
-                                            nama,
-
-                                        email:
-                                            email,
-
-                                        kategori:
-                                            kategori,
-
-                                        judul:
-                                            judul,
-
-                                        deskripsi:
-                                            deskripsi
-
-                                    })
-
+                                    JSON.stringify(
+                                        dataAduan
+                                    )
                             }
                         );
 
@@ -334,21 +287,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     console.log(
-                        "RESPONS API:",
+                        "HASIL DARI GOOGLE APPS SCRIPT:",
                         hasil
                     );
 
+
+                    // =========================
+                    // BERHASIL
+                    // =========================
 
                     if (
                         hasil.status ===
                         "success"
                     ) {
 
-
                         const token =
                             hasil.token;
 
 
+                        // Simpan token
                         localStorage.setItem(
                             "tokenAduan",
                             token
@@ -362,12 +319,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         pesanAduan.innerHTML =
-
                             "✅ Aduan berhasil dikirim!<br><br>" +
 
                             "<strong>Token Aduan kamu:</strong><br>" +
 
-                            "<span style='font-size:22px;font-weight:bold;'>" +
+                            "<span style='font-size:22px; font-weight:bold;'>" +
 
                             token +
 
@@ -376,9 +332,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             "⚠️ Simpan token ini untuk mengecek status aduan kamu.";
 
 
+                        // Kosongkan form
                         formAduan.reset();
 
 
+                        // Tampilkan status
                         tampilkanStatus(
                             "Menunggu"
                         );
@@ -386,14 +344,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     } else {
 
-
                         pesanAduan.innerHTML =
-
-                            "❌ Aduan gagal dikirim.<br>" +
+                            "❌ Aduan gagal dikirim.<br><br>" +
 
                             (
                                 hasil.message ||
-                                ""
+                                "Silakan coba lagi."
                             );
 
                     }
@@ -401,19 +357,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 } catch (error) {
 
-
-                    console.error(error);
+                    console.error(
+                        "ERROR:",
+                        error
+                    );
 
 
                     pesanAduan.innerHTML =
-
-                        "❌ Terjadi kesalahan saat mengirim aduan.";
+                        "❌ Terjadi kesalahan saat mengirim aduan.<br>" +
+                        "Periksa koneksi atau URL Apps Script.";
 
                 }
 
 
-                tombol.disabled =
-                    false;
+                tombol.disabled = false;
 
                 tombol.innerText =
                     "Kirim Aduan";
@@ -424,13 +381,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     // =========================
-    // CEK STATUS OTOMATIS
+    // CEK STATUS ADUAN
     // =========================
 
     async function cekStatusAduan() {
-
 
         const token =
             localStorage.getItem(
@@ -450,22 +405,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-
             const response =
                 await fetch(
-
                     API_ADUAN +
-
                     "?action=cekAduan&token=" +
-
-                    encodeURIComponent(
-                        token
-                    ) +
-
+                    encodeURIComponent(token) +
                     "&t=" +
-
-                    Date.now()
-
+                    new Date().getTime()
                 );
 
 
@@ -473,26 +419,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 await response.json();
 
 
+            console.log(
+                "STATUS ADUAN:",
+                hasil
+            );
+
+
             if (
-                hasil.status ===
+                hasil.status !==
                 "success"
             ) {
 
-                tampilkanStatus(
-                    hasil.data.statusAduan
-                );
+                return;
 
             }
 
 
+            const data =
+                hasil.data;
+
+
+            tampilkanStatus(
+                data.statusAduan ||
+                "Menunggu"
+            );
+
+
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Gagal mengecek status aduan:",
+                error
+            );
 
         }
 
     }
-
 
 
     // =========================
@@ -501,11 +463,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function tampilkanStatus(status) {
 
-
         if (!statusAduan) {
-
             return;
-
         }
 
 
@@ -533,8 +492,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =========================
+    // CEK SAAT HALAMAN DIBUKA
+    // =========================
+
     cekStatusAduan();
 
+
+    // =========================
+    // CEK OTOMATIS 5 DETIK
+    // =========================
 
     setInterval(
         cekStatusAduan,
