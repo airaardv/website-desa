@@ -2,16 +2,12 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <title>Admin | Desa Serunai</title>
 
-    <title>Admin Aduan | Desa Serunai</title>
-
-    <link rel="stylesheet"
-          href="style.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
 
@@ -23,101 +19,186 @@
         .admin-box {
             max-width: 1100px;
             margin: auto;
-
             padding: 40px;
-
             background: rgba(255,255,255,0.82);
-
             border-radius: 30px;
-
-            box-shadow:
-                0 15px 40px
-                rgba(75,90,140,0.15);
-
+            box-shadow: 0 15px 40px rgba(75,90,140,0.15);
             backdrop-filter: blur(15px);
         }
 
-        .admin-title {
+        .admin-header {
             text-align: center;
             margin-bottom: 35px;
         }
 
-        .admin-title .label {
+        .admin-header .label {
             color: #765bc2;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .admin-title h1 {
+        .admin-header h1 {
+            color: #304b68;
+            font-size: 38px;
+            margin: 10px 0;
+        }
+
+        .admin-header p {
+            color: #60738b;
+        }
+
+        /* LOGIN */
+
+        #loginAdmin {
+            max-width: 450px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 25px;
+        }
+
+        #loginAdmin h2 {
+            text-align: center;
             color: #304b68;
         }
 
-        .aduan-admin {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 20px;
-
-            box-shadow:
-                0 5px 20px
-                rgba(75,90,140,0.08);
-        }
-
-        .aduan-admin h2 {
-            color: #304b68;
-        }
-
-        .aduan-admin p {
-            color: #526984;
-        }
-
-        .token-admin {
-            color: #765bc2;
-            font-weight: bold;
-        }
-
-        .status-admin {
-            display: inline-block;
-            padding: 7px 14px;
-            border-radius: 20px;
-            background: #eee8ff;
-            color: #765bc2;
-            font-weight: bold;
-        }
-
-        .status-admin.selesai {
-            background: #e4f8ed;
-            color: #3b9563;
-        }
-
-        .jawaban-input {
+        .input-admin {
             width: 100%;
             box-sizing: border-box;
-            padding: 12px;
+            padding: 14px;
+            margin: 10px 0 20px;
             border: 1px solid #ddd;
-            border-radius: 12px;
-            margin-top: 10px;
-            min-height: 80px;
+            border-radius: 15px;
+            outline: none;
         }
 
-        .admin-button {
-            margin-top: 12px;
-            padding: 11px 20px;
+        .button-admin {
+            width: 100%;
+            padding: 14px;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             background: #9072d5;
             color: white;
             font-weight: bold;
             cursor: pointer;
         }
 
-        .admin-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .button-admin:hover {
+            opacity: 0.85;
         }
 
-        .pesan-admin {
+        #pesanLogin {
             text-align: center;
+            color: #d9534f;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* DASHBOARD */
+
+        #dashboardAdmin {
+            display: none;
+        }
+
+        .logout-button {
+            display: block;
+            margin: 0 0 25px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #d98b8b;
+            color: white;
+            cursor: pointer;
+        }
+
+        .aduan-card {
+            background: rgba(255,255,255,0.9);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 22px;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 20px rgba(75,90,140,0.08);
+        }
+
+        .aduan-card h3 {
+            color: #304b68;
+            margin-top: 0;
+        }
+
+        .aduan-card p {
+            color: #526984;
+            line-height: 1.6;
+        }
+
+        .token-admin {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 15px;
+            background: #eee8ff;
             color: #765bc2;
+            font-weight: bold;
+        }
+
+        .status-admin {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 15px;
+            background: #eee8ff;
+            color: #765bc2;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background: #e4f8ed;
+            color: #3b9563;
+        }
+
+        .confirm-button {
+            margin-top: 15px;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 22px;
+            background: #9072d5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .confirm-button:hover {
+            opacity: 0.85;
+        }
+
+        .jawaban-admin {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .kosong {
+            text-align: center;
+            color: #60738b;
+            padding: 30px;
+        }
+
+        @media(max-width:700px) {
+
+            .admin-page {
+                padding: 40px 4%;
+            }
+
+            .admin-box {
+                padding: 25px 20px;
+            }
+
+            .admin-header h1 {
+                font-size: 30px;
+            }
+
         }
 
     </style>
@@ -127,11 +208,14 @@
 
 <body>
 
+    <!-- DEKORASI -->
 
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
     <div class="shape shape3"></div>
 
+
+    <!-- NAVIGASI -->
 
     <header>
 
@@ -165,8 +249,7 @@
                 Aduan
             </a>
 
-            <a href="admin.html"
-               class="active">
+            <a href="admin.html" class="active">
                 Admin
             </a>
 
@@ -175,33 +258,91 @@
     </header>
 
 
+    <!-- HALAMAN ADMIN -->
+
     <main class="admin-page">
 
         <div class="admin-box">
 
 
-            <div class="admin-title">
+            <!-- HEADER -->
+
+            <div class="admin-header">
 
                 <p class="label">
                     ADMIN DESA SERUNAI
                 </p>
 
                 <h1>
-                    Daftar Aduan Masyarakat
+                    Dashboard Admin
                 </h1>
 
                 <p>
-                    Lihat dan konfirmasi aduan masyarakat.
+                    Kelola dan konfirmasi aduan masyarakat.
                 </p>
 
             </div>
 
 
-            <div id="daftarAduan">
+            <!-- =========================
+                 LOGIN
+            ========================= -->
 
-                <p class="pesan-admin">
-                    ⏳ Memuat data aduan...
+            <div id="loginAdmin">
+
+                <h2>
+                    🔐 Login Admin
+                </h2>
+
+                <p>
+                    Masukkan password untuk membuka dashboard admin.
                 </p>
+
+                <input
+                    type="password"
+                    id="passwordAdmin"
+                    class="input-admin"
+                    placeholder="Masukkan password"
+                >
+
+                <button
+                    class="button-admin"
+                    onclick="loginAdmin()"
+                >
+                    Login
+                </button>
+
+                <div id="pesanLogin"></div>
+
+            </div>
+
+
+            <!-- =========================
+                 DASHBOARD
+            ========================= -->
+
+            <div id="dashboardAdmin">
+
+                <button
+                    class="logout-button"
+                    onclick="logoutAdmin()"
+                >
+                    Logout
+                </button>
+
+
+                <h2>
+                    📋 Daftar Aduan Masyarakat
+                </h2>
+
+
+                <div id="daftarAduan">
+
+                    <p class="kosong">
+                        ⏳ Memuat data aduan...
+                    </p>
+
+                </div>
 
             </div>
 
@@ -209,6 +350,8 @@
 
     </main>
 
+
+    <!-- FOOTER -->
 
     <footer>
 
@@ -219,29 +362,152 @@
     </footer>
 
 
+    <!-- JAVASCRIPT -->
+
     <script>
 
+        // =========================
+        // API ADUAN
+        // =========================
+
         const API_ADUAN =
-            "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
+        "https://script.google.com/macros/s/AKfycbw-L7IMYuUM44FBT_hWW8Sn0xzvXvfEPaYpT8M7Yvt_8tvaSo9ZchyL3w4gG29xix02/exec";
 
 
-        const daftarAduan =
-            document.getElementById(
-                "daftarAduan"
+        // =========================
+        // PASSWORD ADMIN
+        // =========================
+
+        const PASSWORD_ADMIN = "admin123";
+
+
+        // =========================
+        // LOGIN
+        // =========================
+
+        function loginAdmin() {
+
+            const password =
+                document.getElementById(
+                    "passwordAdmin"
+                ).value;
+
+            const pesan =
+                document.getElementById(
+                    "pesanLogin"
+                );
+
+
+            if (password === PASSWORD_ADMIN) {
+
+                localStorage.setItem(
+                    "loginAdmin",
+                    "true"
+                );
+
+                document.getElementById(
+                    "loginAdmin"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "dashboardAdmin"
+                ).style.display = "block";
+
+                pesan.innerHTML = "";
+
+                tampilkanAduan();
+
+            } else {
+
+                pesan.innerHTML =
+                    "❌ Password salah.";
+
+            }
+
+        }
+
+
+        // =========================
+        // ENTER UNTUK LOGIN
+        // =========================
+
+        document
+            .getElementById("passwordAdmin")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (event.key === "Enter") {
+
+                        loginAdmin();
+
+                    }
+
+                }
             );
 
 
-        async function loadAduan() {
+        // =========================
+        // LOGOUT
+        // =========================
+
+        function logoutAdmin() {
+
+            localStorage.removeItem(
+                "loginAdmin"
+            );
+
+            location.reload();
+
+        }
+
+
+        // =========================
+        // CEK LOGIN
+        // =========================
+
+        if (
+            localStorage.getItem(
+                "loginAdmin"
+            ) === "true"
+        ) {
+
+            document.getElementById(
+                "loginAdmin"
+            ).style.display = "none";
+
+            document.getElementById(
+                "dashboardAdmin"
+            ).style.display = "block";
+
+            tampilkanAduan();
+
+        }
+
+
+        // =========================
+        // AMBIL DATA ADUAN
+        // =========================
+
+        async function tampilkanAduan() {
+
+            const daftar =
+                document.getElementById(
+                    "daftarAduan"
+                );
+
+
+            daftar.innerHTML =
+                "<p class='kosong'>⏳ Memuat data aduan...</p>";
 
 
             try {
-
 
                 const response =
                     await fetch(
                         API_ADUAN +
                         "?action=getAduan&t=" +
-                        Date.now()
+                        new Date().getTime()
                     );
 
 
@@ -249,108 +515,118 @@
                     await response.json();
 
 
-                daftarAduan.innerHTML =
-                    "";
-
-
                 if (
+                    !data ||
                     data.length === 0
                 ) {
 
-                    daftarAduan.innerHTML =
-                        "<p class='pesan-admin'>Belum ada aduan.</p>";
+                    daftar.innerHTML =
+                        "<p class='kosong'>📭 Belum ada aduan masyarakat.</p>";
 
                     return;
 
                 }
 
 
-                data.reverse();
+                daftar.innerHTML = "";
 
 
-                data.forEach(
+                data.reverse().forEach(
                     function(item) {
-
 
                         const card =
                             document.createElement(
                                 "div"
                             );
 
-
                         card.className =
-                            "aduan-admin";
+                            "aduan-card";
 
 
-                        const sudah =
+                        const sudahKonfirmasi =
                             item.status ===
                             "Terkonfirmasi";
 
 
                         card.innerHTML = `
 
-                            <h2>
-                                ${item.judul}
-                            </h2>
-
-                            <p>
-                                <strong>Token:</strong>
-                                <span class="token-admin">
-                                    ${item.token}
-                                </span>
-                            </p>
+                            <h3>
+                                ${item.judul || "Tanpa Judul"}
+                            </h3>
 
                             <p>
                                 <strong>Nama:</strong>
-                                ${item.nama}
+                                ${item.nama || "-"}
                             </p>
 
                             <p>
                                 <strong>Email:</strong>
-                                ${item.email}
+                                ${item.email || "-"}
                             </p>
 
                             <p>
                                 <strong>Kategori:</strong>
-                                ${item.kategori}
+                                ${item.kategori || "-"}
                             </p>
 
                             <p>
                                 <strong>Deskripsi:</strong><br>
-                                ${item.deskripsi}
+                                ${item.deskripsi || "-"}
+                            </p>
+
+                            <p>
+                                <strong>Token:</strong><br>
+                                <span class="token-admin">
+                                    ${item.token || "-"}
+                                </span>
                             </p>
 
                             <p>
                                 <strong>Status:</strong><br>
 
-                                <span class="status-admin ${sudah ? "selesai" : ""}">
-                                    ${sudah ? "✓ Terkonfirmasi" : "🕐 Menunggu"}
+                                <span class="
+                                    status-admin
+                                    ${sudahKonfirmasi ? "status-confirmed" : ""}
+                                ">
+                                    ${
+                                        sudahKonfirmasi
+                                        ? "✓ Terkonfirmasi"
+                                        : "🕐 Menunggu"
+                                    }
                                 </span>
 
                             </p>
 
-                            <textarea
-                                class="jawaban-input"
-                                id="jawaban-${item.baris}"
-                                placeholder="Tulis jawaban admin..."
-                            >${item.jawaban || ""}</textarea>
+                            ${
+                                sudahKonfirmasi
+                                ? `
+                                    <p>
+                                        <strong>Jawaban Admin:</strong><br>
+                                        ${item.jawaban || "Tidak ada jawaban."}
+                                    </p>
+                                `
+                                : `
+                                    <textarea
+                                        class="jawaban-admin"
+                                        id="jawaban-${item.baris}"
+                                        placeholder="Tulis jawaban admin..."
+                                    ></textarea>
 
-                            <br>
+                                    <br>
 
-                            <button
-                                class="admin-button"
-                                onclick="konfirmasiAduan(${item.baris})"
-                                ${sudah ? "disabled" : ""}
-                            >
-                                ${sudah ? "✓ Sudah Dikonfirmasi" : "Konfirmasi Aduan"}
-                            </button>
+                                    <button
+                                        class="confirm-button"
+                                        onclick="konfirmasiAduan(${item.baris})"
+                                    >
+                                        ✓ Konfirmasi Aduan
+                                    </button>
+                                `
+                            }
 
                         `;
 
 
-                        daftarAduan.appendChild(
-                            card
-                        );
+                        daftar.appendChild(card);
 
                     }
                 );
@@ -358,24 +634,21 @@
 
             } catch (error) {
 
-
                 console.error(error);
 
-
-                daftarAduan.innerHTML =
-
-                    "<p class='pesan-admin'>" +
-                    "❌ Gagal mengambil data aduan." +
-                    "</p>";
+                daftar.innerHTML =
+                    "<p class='kosong'>❌ Gagal mengambil data aduan.</p>";
 
             }
 
         }
 
 
+        // =========================
+        // KONFIRMASI ADUAN
+        // =========================
 
         async function konfirmasiAduan(baris) {
-
 
             const jawaban =
                 document.getElementById(
@@ -386,7 +659,7 @@
             if (!jawaban) {
 
                 alert(
-                    "Silakan tulis jawaban admin terlebih dahulu."
+                    "Silakan isi jawaban admin terlebih dahulu."
                 );
 
                 return;
@@ -396,31 +669,27 @@
 
             try {
 
-
                 const response =
                     await fetch(
                         API_ADUAN,
                         {
-
                             method: "POST",
 
-                            body:
-                                JSON.stringify({
+                            body: JSON.stringify({
 
-                                    action:
-                                        "updateStatus",
+                                action:
+                                    "updateStatus",
 
-                                    baris:
-                                        baris,
+                                baris:
+                                    baris,
 
-                                    status:
-                                        "Terkonfirmasi",
+                                status:
+                                    "Terkonfirmasi",
 
-                                    jawaban:
-                                        jawaban
+                                jawaban:
+                                    jawaban
 
-                                })
-
+                            })
                         }
                     );
 
@@ -435,16 +704,15 @@
                 ) {
 
                     alert(
-                        "Aduan berhasil dikonfirmasi!"
+                        "✅ Aduan berhasil dikonfirmasi!"
                     );
 
-
-                    loadAduan();
+                    tampilkanAduan();
 
                 } else {
 
                     alert(
-                        "Gagal mengkonfirmasi aduan."
+                        "❌ Gagal mengkonfirmasi aduan."
                     );
 
                 }
@@ -455,18 +723,14 @@
                 console.error(error);
 
                 alert(
-                    "Terjadi kesalahan."
+                    "❌ Terjadi kesalahan."
                 );
 
             }
 
         }
 
-
-        loadAduan();
-
     </script>
-
 
 </body>
 
