@@ -8,22 +8,27 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Aduan Masyarakat | Desa Serunai</title>
+    <title>Aduan | Desa Serunai</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
+
+        /* =========================
+           HALAMAN ADUAN
+        ========================= */
 
         .aduan-page {
             min-height: 100vh;
             padding: 70px 6%;
         }
 
+
         .aduan-box {
             max-width: 1000px;
             margin: auto;
 
-            padding: 35px;
+            padding: 40px;
 
             background: rgba(255,255,255,0.78);
 
@@ -36,56 +41,158 @@
             backdrop-filter: blur(15px);
         }
 
+
         .aduan-header {
             text-align: center;
             margin-bottom: 35px;
         }
 
+
+        .aduan-header .label {
+            color: #765bc2;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+
         .aduan-header h1 {
             color: #304b68;
             font-size: 38px;
-            margin-bottom: 10px;
+            margin: 10px 0;
         }
+
 
         .aduan-header p {
             color: #60738b;
         }
 
-        .status-info {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #60738b;
-            font-weight: bold;
+
+        /* =========================
+           CEK TOKEN
+        ========================= */
+
+        .cek-box {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            padding: 30px;
+
+            background: rgba(255,255,255,0.85);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(75,90,140,0.10);
+
         }
 
-        .aduan-card {
-            background: rgba(255,255,255,0.9);
+
+        .cek-box h2 {
+            color: #304b68;
+            margin-top: 0;
+        }
+
+
+        .cek-box p {
+            color: #60738b;
+        }
+
+
+        .token-input {
+
+            width: 100%;
+
+            padding: 15px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #ddd;
+
+            border-radius: 15px;
+
+            outline: none;
+
+            margin: 15px 0;
+
+            font-size: 15px;
+
+        }
+
+
+        .cek-button {
+
+            padding: 13px 25px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #9072d5;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .cek-button:hover {
+            opacity: 0.85;
+        }
+
+
+        /* =========================
+           HASIL ADUAN
+        ========================= */
+
+        #hasilAduan {
+
+            display: none;
+
+            margin-top: 30px;
 
             padding: 25px;
 
-            margin-bottom: 20px;
+            background: rgba(255,255,255,0.9);
 
-            border-radius: 20px;
+            border-radius: 25px;
 
-            box-shadow:
-                0 8px 25px
-                rgba(75,90,140,0.10);
+            border: 1px solid #eee;
+
         }
 
-        .aduan-card h2 {
+
+        #hasilAduan h2 {
             color: #304b68;
-            margin-bottom: 10px;
+            margin-top: 0;
         }
 
-        .aduan-card p {
+
+        .data-item {
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #eeeeee;
+
             color: #526984;
-            line-height: 1.6;
+
         }
 
-        .status {
-            display: inline-block;
 
-            margin-top: 15px;
+        .data-item strong {
+            color: #304b68;
+        }
+
+
+        .status-menunggu {
+
+            display: inline-block;
 
             padding: 8px 15px;
 
@@ -96,17 +203,71 @@
             color: #765bc2;
 
             font-weight: bold;
+
         }
 
-        .terkonfirmasi {
+
+        .status-terkonfirmasi {
+
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
             background: #e4f8ed;
+
             color: #3b9563;
+
+            font-weight: bold;
+
         }
 
-        .kosong {
-            text-align: center;
-            padding: 40px;
-            color: #718198;
+
+        .jawaban {
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            background: #f5f2ff;
+
+            border-radius: 15px;
+
+            color: #526984;
+
+        }
+
+
+        .pesan-error {
+
+            margin-top: 15px;
+
+            color: #d9534f;
+
+            font-weight: bold;
+
+        }
+
+
+        @media(max-width:700px) {
+
+            .aduan-page {
+                padding: 40px 4%;
+            }
+
+            .aduan-box {
+                padding: 25px 20px;
+            }
+
+            .aduan-header h1 {
+                font-size: 30px;
+            }
+
+            .cek-box {
+                padding: 20px;
+            }
+
         }
 
     </style>
@@ -120,6 +281,7 @@
 
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
 
 
     <!-- NAVIGASI -->
@@ -129,6 +291,7 @@
         <div class="logo">
             Desa Serunai
         </div>
+
 
         <nav>
 
@@ -165,11 +328,14 @@
     </header>
 
 
-    <!-- HALAMAN ADUAN -->
+    <!-- =========================
+         HALAMAN ADUAN
+    ========================= -->
 
     <main class="aduan-page">
 
         <div class="aduan-box">
+
 
             <div class="aduan-header">
 
@@ -178,26 +344,117 @@
                 </p>
 
                 <h1>
-                    Hasil Aduan Saya
+                    Cek Status Aduan
                 </h1>
 
                 <p>
-                    Lihat status aduan yang telah kamu kirim.
+                    Masukkan token aduan untuk melihat
+                    status dan jawaban dari admin Desa Serunai.
                 </p>
 
             </div>
 
 
-            <div
-                id="statusInfo"
-                class="status-info">
+            <!-- CEK TOKEN -->
 
-                ⏳ Memuat data aduan...
+            <div class="cek-box">
 
-            </div>
+                <h2>
+                    🔎 Cek Aduan
+                </h2>
+
+                <p>
+                    Masukkan token yang kamu dapat
+                    setelah mengirim aduan.
+                </p>
 
 
-            <div id="daftarAduan">
+                <input
+                    type="text"
+                    id="token"
+                    class="token-input"
+                    placeholder="Contoh: ADUAN-123456789"
+                >
+
+
+                <button
+                    class="cek-button"
+                    onclick="cekAduan()">
+
+                    Cek Status →
+
+                </button>
+
+
+                <div
+                    id="pesanError"
+                    class="pesan-error">
+                </div>
+
+
+                <!-- HASIL -->
+
+                <div id="hasilAduan">
+
+                    <h2>
+                        📋 Detail Aduan
+                    </h2>
+
+
+                    <div class="data-item">
+                        <strong>Token:</strong>
+                        <span id="hasilToken"></span>
+                    </div>
+
+
+                    <div class="data-item">
+                        <strong>Nama:</strong>
+                        <span id="hasilNama"></span>
+                    </div>
+
+
+                    <div class="data-item">
+                        <strong>Kategori:</strong>
+                        <span id="hasilKategori"></span>
+                    </div>
+
+
+                    <div class="data-item">
+                        <strong>Judul:</strong>
+                        <span id="hasilJudul"></span>
+                    </div>
+
+
+                    <div class="data-item">
+                        <strong>Deskripsi:</strong>
+                        <span id="hasilDeskripsi"></span>
+                    </div>
+
+
+                    <div class="data-item">
+
+                        <strong>Status:</strong>
+
+                        <span id="hasilStatus"></span>
+
+                    </div>
+
+
+                    <div class="jawaban">
+
+                        <strong>
+                            💬 Jawaban Admin
+                        </strong>
+
+                        <br><br>
+
+                        <span id="hasilJawaban">
+                            Belum ada jawaban dari admin.
+                        </span>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -205,6 +462,8 @@
 
     </main>
 
+
+    <!-- FOOTER -->
 
     <footer>
 
@@ -215,154 +474,171 @@
     </footer>
 
 
-<script>
+    <!-- JAVASCRIPT -->
 
-const API_ADUAN =
-"https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
+    <script>
 
-
-function loadAduanSaya() {
-
-    const email =
-        localStorage.getItem("emailAduan");
-
-    const daftar =
-        document.getElementById("daftarAduan");
-
-    const statusInfo =
-        document.getElementById("statusInfo");
+        const API_ADUAN =
+        "https://script.google.com/macros/s/AKfycbxWX-4-dvX_cE5C06ku04HOWP8D1buWyfQEOkdtqHyENTn83gyqVWhPDBZfevCnacUU/exec";
 
 
-    if (!email) {
+        async function cekAduan() {
 
-        statusInfo.innerHTML =
-            "📭 Belum ada aduan.";
+            const token =
+                document.getElementById("token")
+                .value
+                .trim();
 
-        daftar.innerHTML = `
-            <div class="kosong">
-                Kamu belum mengirim aduan.
-                <br><br>
-                Silakan isi aduan melalui halaman Kegiatan.
-            </div>
-        `;
+            const pesanError =
+                document.getElementById("pesanError");
 
-        return;
-
-    }
+            const hasilAduan =
+                document.getElementById("hasilAduan");
 
 
-    statusInfo.innerHTML =
-        "⏳ Memuat status aduan...";
+            pesanError.innerHTML = "";
+
+            hasilAduan.style.display = "none";
 
 
-    fetch(
-        API_ADUAN +
-        "?action=getAduan&t=" +
-        new Date().getTime()
-    )
+            if (!token) {
 
-    .then(response => response.json())
+                pesanError.innerHTML =
+                    "❌ Silakan masukkan token aduan.";
 
-    .then(data => {
+                return;
 
-        const aduanSaya =
-            data.filter(function(item) {
-
-                return (
-                    item.email &&
-                    item.email.toLowerCase() ===
-                    email.toLowerCase()
-                );
-
-            });
+            }
 
 
-        if (aduanSaya.length === 0) {
+            try {
 
-            statusInfo.innerHTML =
-                "📭 Aduan tidak ditemukan.";
+                const response =
+                    await fetch(
+                        API_ADUAN +
+                        "?action=cekAduan&token=" +
+                        encodeURIComponent(token) +
+                        "&t=" +
+                        new Date().getTime()
+                    );
 
-            return;
+
+                const hasil =
+                    await response.json();
+
+
+                if (
+                    hasil.status !==
+                    "success"
+                ) {
+
+                    pesanError.innerHTML =
+                        "❌ Token aduan tidak ditemukan.";
+
+                    return;
+
+                }
+
+
+                const data =
+                    hasil.data;
+
+
+                document.getElementById(
+                    "hasilToken"
+                ).textContent =
+                    data.id;
+
+
+                document.getElementById(
+                    "hasilNama"
+                ).textContent =
+                    data.nama;
+
+
+                document.getElementById(
+                    "hasilKategori"
+                ).textContent =
+                    data.kategori;
+
+
+                document.getElementById(
+                    "hasilJudul"
+                ).textContent =
+                    data.judul;
+
+
+                document.getElementById(
+                    "hasilDeskripsi"
+                ).textContent =
+                    data.deskripsi;
+
+
+                const status =
+                    document.getElementById(
+                        "hasilStatus"
+                    );
+
+
+                if (
+                    data.statusAduan ===
+                    "Terkonfirmasi"
+                ) {
+
+                    status.innerHTML =
+                        `<span class="status-terkonfirmasi">
+                            ✓ Terkonfirmasi
+                        </span>`;
+
+                } else {
+
+                    status.innerHTML =
+                        `<span class="status-menunggu">
+                            🕐 Menunggu
+                        </span>`;
+
+                }
+
+
+                document.getElementById(
+                    "hasilJawaban"
+                ).textContent =
+                    data.jawaban ||
+                    "Belum ada jawaban dari admin.";
+
+
+                hasilAduan.style.display =
+                    "block";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                pesanError.innerHTML =
+                    "❌ Terjadi kesalahan saat mengecek aduan.";
+
+            }
 
         }
 
 
-        daftar.innerHTML = "";
+        document
+        .getElementById("token")
+        .addEventListener(
+            "keydown",
+            function(event) {
 
+                if (event.key === "Enter") {
 
-        aduanSaya.reverse().forEach(function(item) {
+                    cekAduan();
 
-            const sudahKonfirmasi =
-                item.status === "Terkonfirmasi";
+                }
 
+            }
+        );
 
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "aduan-card";
-
-
-            card.innerHTML = `
-
-                <h2>
-                    ${item.judul || ""}
-                </h2>
-
-                <p>
-                    <strong>Kategori:</strong>
-                    ${item.kategori || ""}
-                </p>
-
-                <p>
-                    <strong>Deskripsi:</strong>
-                    ${item.deskripsi || ""}
-                </p>
-
-                <span class="status ${
-                    sudahKonfirmasi
-                    ? "terkonfirmasi"
-                    : ""
-                }">
-
-                    ${
-                        sudahKonfirmasi
-                        ? "✅ Terkonfirmasi"
-                        : "🕐 Menunggu Konfirmasi"
-                    }
-
-                </span>
-
-            `;
-
-
-            daftar.appendChild(card);
-
-        });
-
-
-        statusInfo.innerHTML =
-            "✅ Data aduan berhasil dimuat.";
-
-    })
-
-
-    .catch(error => {
-
-        console.error(error);
-
-        statusInfo.innerHTML =
-            "❌ Gagal memuat data aduan.";
-
-    });
-
-}
-
-
-loadAduanSaya();
-
-</script>
-
+    </script>
 
 </body>
 
