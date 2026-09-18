@@ -209,189 +209,166 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("statusAduan");
 
 
-    // =========================
-    // FORM ADUAN
-    // =========================
+   // =========================
+// FORM ADUAN
+// =========================
 
-    if (formAduan) {
+if (formAduan) {
 
-        formAduan.addEventListener(
-            "submit",
-            async function (e) {
+    formAduan.addEventListener("submit", async function (e) {
 
-                e.preventDefault();
+        e.preventDefault();
 
-
-                const tombol =
-                    formAduan.querySelector(
-                        "button[type='submit']"
-                    );
-
-
-                // Mencegah kirim dua kali
-                if (tombol.disabled) {
-                    return;
-                }
-
-
-                tombol.disabled = true;
-                tombol.innerText = "Mengirim...";
-
-
-                const pesanAduan =
-                    document.getElementById(
-                        "pesanAduan"
-                    );
-
-
-                const nama =
-                    document.getElementById(
-                        "nama"
-                    ).value.trim();
-
-
-                const email =
-                    document.getElementById(
-                        "email"
-                    ).value.trim();
-
-
-                const kategori =
-                    document.getElementById(
-                        "kategori"
-                    ).value;
-
-
-                const judul =
-                    document.getElementById(
-                        "judul"
-                    ).value.trim();
-
-
-                const deskripsi =
-                    document.getElementById(
-                        "deskripsi"
-                    ).value.trim();
-
-
-                const dataAduan = {
-
-                    nama: nama,
-
-                    email: email,
-
-                    kategori: kategori,
-
-                    judul: judul,
-
-                    deskripsi: deskripsi
-
-                };
-
-
-                pesanAduan.textContent =
-                    "⏳ Mengirim aduan...";
-
-
-                try {
-
-                    const response =
-                        await fetch(
-                            API_ADUAN,
-                            {
-                                method: "POST",
-
-                                body:
-                                    JSON.stringify(
-                                        dataAduan
-                                    )
-                            }
-                        );
-
-
-                    const hasil =
-                        await response.json();
-
-
-                    console.log(
-                        "Hasil dari API Aduan:",
-                        hasil
-                    );
-
-
-                    // =========================
-                    // BERHASIL
-                    // =========================
-
-                    if (
-                        hasil.status ===
-                        "success"
-                    ) {
-
-                        // Simpan token
-                        localStorage.setItem(
-                            "tokenAduan",
-                            hasil.token
-                        );
-
-
-                        // Tampilkan token
-                        pesanAduan.innerHTML =
-                            "✅ Aduan berhasil dikirim!<br><br>" +
-
-                            "<strong>Token Aduan kamu:</strong><br>" +
-
-                            "<span style='font-size: 20px; font-weight: bold;'>" +
-
-                            hasil.token +
-
-                            "</span><br><br>" +
-
-                            "⚠️ Simpan token ini untuk mengecek status aduan kamu.";
-
-
-                        formAduan.reset();
-
-                    }
-
-
-                    // =========================
-                    // GAGAL
-                    // =========================
-
-                    else {
-
-                        pesanAduan.textContent =
-                            "❌ Aduan gagal dikirim.";
-
-                    }
-
-
-                } catch (error) {
-
-                    console.error(
-                        "Error aduan:",
-                        error
-                    );
-
-
-                    pesanAduan.textContent =
-                        "❌ Terjadi kesalahan saat mengirim aduan.";
-
-                }
-
-
-                tombol.disabled = false;
-
-                tombol.innerText =
-                    "Kirim Aduan";
-
-            }
+        const tombol = formAduan.querySelector(
+            "button[type='submit']"
         );
 
-    }
+        if (tombol.disabled) {
+            return;
+        }
+
+        tombol.disabled = true;
+        tombol.innerText = "Mengirim...";
+
+        const pesanAduan =
+            document.getElementById("pesanAduan");
+
+        const nama =
+            document.getElementById("nama").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const kategori =
+            document.getElementById("kategori").value;
+
+        const judul =
+            document.getElementById("judul").value.trim();
+
+        const deskripsi =
+            document.getElementById("deskripsi").value.trim();
 
 
+        // =========================
+        // BUAT TOKEN DI WEBSITE
+        // =========================
+
+        const token =
+            "ADUAN-" +
+            Date.now().toString().slice(-10);
+
+
+        const dataAduan = {
+
+            nama: nama,
+            email: email,
+            kategori: kategori,
+            judul: judul,
+            deskripsi: deskripsi,
+
+            // kirim token ke Google Sheets
+            token: token
+
+        };
+
+
+        localStorage.setItem(
+            "tokenAduan",
+            token
+        );
+
+        localStorage.setItem(
+            "emailAduan",
+            email
+        );
+
+
+        pesanAduan.innerHTML =
+            "⏳ Mengirim aduan...";
+
+
+        try {
+
+            const response = await fetch(
+                API_ADUAN,
+                {
+                    method: "POST",
+                    body: JSON.stringify(dataAduan)
+                }
+            );
+
+
+            const hasil =
+                await response.json();
+
+
+            console.log(
+                "HASIL DARI GOOGLE APPS SCRIPT:",
+                hasil
+            );
+
+
+            if (hasil.status === "success") {
+
+                // ambil token dari server
+                // kalau tidak ada, gunakan token yang dibuat website
+                const tokenFinal =
+                    hasil.token || token;
+
+
+                pesanAduan.innerHTML =
+                    "✅ Aduan berhasil dikirim!<br><br>" +
+
+                    "<strong>Token Aduan kamu:</strong><br>" +
+
+                    "<span style='font-size: 20px; font-weight: bold;'>" +
+
+                    tokenFinal +
+
+                    "</span><br><br>" +
+
+                    "⚠️ Simpan token ini untuk mengecek status aduan kamu.";
+
+
+                localStorage.setItem(
+                    "tokenAduan",
+                    tokenFinal
+                );
+
+
+                formAduan.reset();
+
+
+                tampilkanStatus("Menunggu");
+
+
+            } else {
+
+                pesanAduan.innerHTML =
+                    "❌ Aduan gagal dikirim.<br>" +
+                    (hasil.message || "");
+
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            pesanAduan.innerHTML =
+                "❌ Terjadi kesalahan saat mengirim aduan.";
+
+        }
+
+
+        tombol.disabled = false;
+        tombol.innerText = "Kirim Aduan";
+
+    });
+
+}
+
+    
     // =========================
     // CEK STATUS ADUAN
     // =========================
