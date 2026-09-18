@@ -323,20 +323,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     if (
-                        hasil.status ===
-                        "success"
-                    ) {
+    hasil.status ===
+    "success"
+) {
 
-                        pesanAduan.textContent =
-                            "✅ Aduan berhasil dikirim!";
+    pesanAduan.innerHTML =
+        "✅ Aduan berhasil dikirim!<br><br>" +
+        "🔑 Token Aduan kamu:<br>" +
+        "<strong>" +
+        hasil.token +
+        "</strong><br><br>" +
+        "Simpan token ini untuk mengecek status aduan.";
 
+    formAduan.reset();
 
-                        formAduan.reset();
+    tampilkanStatus(
+        "Menunggu"
+    );
 
-
-                        tampilkanStatus(
-                            "Menunggu"
-                        );
+}
 
 
                     } else {
