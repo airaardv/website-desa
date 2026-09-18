@@ -193,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-
     // =========================
     // API ADUAN
     // =========================
@@ -290,14 +289,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 };
 
 
-                // Simpan email pengadu
-                // agar statusnya bisa dicek lagi
-                localStorage.setItem(
-                    "emailAduan",
-                    email
-                );
-
-
                 pesanAduan.textContent =
                     "⏳ Mengirim aduan...";
 
@@ -322,29 +313,53 @@ document.addEventListener("DOMContentLoaded", function () {
                         await response.json();
 
 
+                    console.log(
+                        "Hasil dari API Aduan:",
+                        hasil
+                    );
+
+
+                    // =========================
+                    // BERHASIL
+                    // =========================
+
                     if (
-    hasil.status ===
-    "success"
-) {
+                        hasil.status ===
+                        "success"
+                    ) {
 
-    pesanAduan.innerHTML =
-        "✅ Aduan berhasil dikirim!<br><br>" +
-        "🔑 Token Aduan kamu:<br>" +
-        "<strong>" +
-        hasil.token +
-        "</strong><br><br>" +
-        "Simpan token ini untuk mengecek status aduan.";
-
-    formAduan.reset();
-
-    tampilkanStatus(
-        "Menunggu"
-    );
-
-}
+                        // Simpan token
+                        localStorage.setItem(
+                            "tokenAduan",
+                            hasil.token
+                        );
 
 
-                    } else {
+                        // Tampilkan token
+                        pesanAduan.innerHTML =
+                            "✅ Aduan berhasil dikirim!<br><br>" +
+
+                            "<strong>Token Aduan kamu:</strong><br>" +
+
+                            "<span style='font-size: 20px; font-weight: bold;'>" +
+
+                            hasil.token +
+
+                            "</span><br><br>" +
+
+                            "⚠️ Simpan token ini untuk mengecek status aduan kamu.";
+
+
+                        formAduan.reset();
+
+                    }
+
+
+                    // =========================
+                    // GAGAL
+                    // =========================
+
+                    else {
 
                         pesanAduan.textContent =
                             "❌ Aduan gagal dikirim.";
@@ -354,7 +369,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 } catch (error) {
 
-                    console.error(error);
+                    console.error(
+                        "Error aduan:",
+                        error
+                    );
+
 
                     pesanAduan.textContent =
                         "❌ Terjadi kesalahan saat mengirim aduan.";
@@ -373,21 +392,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     // =========================
     // CEK STATUS ADUAN
     // =========================
 
     async function cekStatusAduan() {
 
-        const email =
+        const token =
             localStorage.getItem(
-                "emailAduan"
+                "tokenAduan"
             );
 
 
         if (
-            !email ||
+            !token ||
             !statusAduan
         ) {
 
@@ -401,32 +419,26 @@ document.addEventListener("DOMContentLoaded", function () {
             const response =
                 await fetch(
                     API_ADUAN +
-                    "?action=getAduan&t=" +
+                    "?action=cekAduan&token=" +
+                    encodeURIComponent(token) +
+                    "&t=" +
                     new Date().getTime()
                 );
 
 
-            const data =
+            const hasil =
                 await response.json();
 
 
-            // Cari aduan berdasarkan email
-            const aduanSaya =
-                data.filter(
-                    function (item) {
-
-                        return (
-                            item.email &&
-                            item.email.toLowerCase() ===
-                            email.toLowerCase()
-                        );
-
-                    }
-                );
+            console.log(
+                "Status aduan:",
+                hasil
+            );
 
 
             if (
-                aduanSaya.length === 0
+                hasil.status !==
+                "success"
             ) {
 
                 return;
@@ -434,15 +446,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            // Ambil aduan terakhir
-            const aduan =
-                aduanSaya[
-                    aduanSaya.length - 1
-                ];
+            const data =
+                hasil.data;
 
 
             tampilkanStatus(
-                aduan.status ||
+                data.statusAduan ||
                 "Menunggu"
             );
 
@@ -459,7 +468,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     // =========================
     // TAMPILKAN STATUS
     // =========================
@@ -467,7 +475,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function tampilkanStatus(status) {
 
         if (!statusAduan) {
+
             return;
+
         }
 
 
@@ -482,8 +492,10 @@ document.addEventListener("DOMContentLoaded", function () {
             statusAduan.style.color =
                 "#3b9563";
 
+        }
 
-        } else {
+
+        else {
 
             statusAduan.innerHTML =
                 "🕐 Aduan kamu sedang menunggu konfirmasi.";
@@ -496,13 +508,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     // =========================
-    // CEK STATUS SAAT HALAMAN DIBUKA
+    // CEK STATUS SAAT HALAMAN
+    // DIBUKA
     // =========================
 
     cekStatusAduan();
-
 
 
     // =========================
